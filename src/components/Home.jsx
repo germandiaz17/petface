@@ -37,40 +37,40 @@ export function Home({ user, setUser }) {
               nombre={"paris"}
               raza={"Calico"}
               desc={
-                "Gata manchada proveniente de la ciudad de fusa y en perfecto estado de salud"
+                "Paris es una gata Calico de 3 años. Su pelaje es una hermosa mezcla de negro, blanco y anaranjado, típico de su raza. Paris es una gata muy cariñosa y le encanta acurrucarse en el regazo de las personas. Es juguetona y curiosa, siempre explorando su entorno. Se lleva bien con otros gatos y es muy amigable con las personas. Paris está esterilizada, vacunada y en perfecto estado de salud. Está buscando un hogar amoroso donde pueda recibir y dar mucho amor."
               }
               foto={imagenes.img1}
-              genero={"femenino"}
+              genero={"Hembra"}
               user={user}
             />
             <Tarjeta
-              nombre={"paris"}
-              raza={"Calico"}
+              nombre={"Max"}
+              raza={"Huskye"}
               desc={
-                "Gata manchada proveniente de la ciudad de fusa y en perfecto estado de salud"
+                "Max es un Labrador Retriever de 3 años, conocido por su pelaje dorado y su energía inagotable. Es un perro muy sociable y amigable, que disfruta de la compañía tanto de personas como de otros animales. Max adora jugar al aire libre, especialmente con pelotas y frisbees, y siempre está listo para una aventura. Es muy inteligente y ha sido entrenado en obediencia básica, lo que lo hace muy fácil de manejar. Max es ideal para una familia activa que pueda proporcionarle el ejercicio y la atención que necesita. Está vacunado, desparasitado y en perfecto estado de salud, listo para encontrar un hogar amoroso."
               }
-              foto={imagenes.img1}
-              genero={"femenino"}
+              foto={imagenes.img2}
+              genero={"Macho"}
               user={user}
             />
             <Tarjeta
-              nombre={"paris"}
-              raza={"Calico"}
+              nombre={"Bella"}
+              raza={"Golden Retriever"}
               desc={
-                "Gata manchada proveniente de la ciudad de fusa y en perfecto estado de salud"
+                "Bella es una Golden Retriever de 2 años, con un pelaje dorado brillante y un carácter excepcionalmente cariñoso. Le encanta estar rodeada de personas y es especialmente buena con los niños, lo que la convierte en la mascota perfecta para familias. Bella disfruta de los paseos largos y es muy obediente, siempre lista para aprender nuevos trucos. Además, tiene un temperamento tranquilo y se lleva bien con otros animales. Bella está vacunada, esterilizada y ha recibido todas sus revisiones veterinarias, asegurando que está en óptimas condiciones de salud. Busca un hogar donde pueda recibir el amor y el cuidado que tanto merece."
               }
-              foto={imagenes.img1}
-              genero={"femenino"}
+              foto={imagenes.img3}
+              genero={"Hembra"}
               user={user}
             />
             <Tarjeta
-              nombre={"paris"}
-              raza={"Calico"}
+              nombre={"Luna"}
+              raza={"Hembra"}
               desc={
-                "Gata manchada proveniente de la ciudad de fusa y en perfecto estado de salud"
+                "Luna es una gata Siamés de 4 años, reconocida por su elegante pelaje color crema con puntos oscuros y sus impactantes ojos azules. Luna es una gata muy independiente, pero también muy afectuosa cuando se siente cómoda. Le gusta pasar tiempo en lugares altos observando todo a su alrededor, y es muy curiosa por naturaleza. Luna es perfecta para un hogar tranquilo, idealmente sin otros animales, donde pueda ser la reina del hogar. Le encanta jugar con juguetes interactivos y disfruta de las caricias. Luna está esterilizada, vacunada y en excelente estado de salud. Está buscando un hogar donde pueda sentirse segura y amada."
               }
-              foto={imagenes.img1}
-              genero={"femenino"}
+              foto={imagenes.img4}
+              genero={"Hembra"}
               user={user}
             />
           </div>
