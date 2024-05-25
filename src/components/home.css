@@ -1,0 +1,242 @@
+.presentacion{
+    opacity: 0.8;
+    display: flex;
+    background-image: url("../assets/img/publicidad.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.presentacion div {
+    height: 85vh;
+    width: 50%;
+}
+
+.pres-iz{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.listado {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+/* INICIO */
+
+header {
+    background-color: #5cb85c;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+header h1 {
+    margin: 0;
+}
+.hero {
+    background-image: url('../assets/img/papel_tapiz1.png');
+    background-size: contain;
+    /* background-repeat: repeat; */
+    background-attachment: fixed;
+    color: #fff;
+    text-align: center;
+    padding: 100px 20px;
+}
+.hero h2 {
+    margin: 0;
+    font-size: 48px;
+    line-height: 1.2;
+}
+.hero p {
+    font-size: 24px;
+    margin-top: 10px;
+}
+.hero button {
+    background-color: #4cae4c;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.hero button:hover {
+    background-color: #45a049;
+}
+.section {
+    position: relative;
+    padding: 50px 20px;
+    text-align: center;
+}
+.section h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+.section p {
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.testimonios {
+    background-color: #fff;
+    padding: 50px 20px;
+}
+.testimonios blockquote {
+    font-size: 18px;
+    color: #666;
+    margin: 0 auto 30px;
+    max-width: 800px;
+    line-height: 1.6;
+    position: relative;
+}
+
+.testimonios h2 {
+    color: #333;
+}
+.testimonios blockquote:before {
+    content: "“";
+    font-size: 50px;
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    color: #5cb85c;
+}
+.testimonios blockquote:after {
+    content: "”";
+    font-size: 50px;
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    color: #5cb85c;
+}
+.testimonios cite {
+    display: block;
+    text-align: right;
+    color: #333;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* DONACIONES */
+
+.donaciones {
+    background-color: #f4f4f4;
+    padding: 50px 20px;
+    text-align: center;
+}
+.donaciones h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+.donaciones p {
+    margin-bottom: 30px;
+    color: #666;
+    font-size: 18px;
+    line-height: 1.6;
+}
+.donaciones-formulario {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.donaciones-formulario input,
+.donaciones-formulario button {
+    width: 95%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.donaciones-formulario button {
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+.donaciones-formulario button:hover {
+    background-color: #4cae4c;
+}
+.donaciones-metodos {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+.donaciones-metodo {
+    text-align: center;
+}
+.donaciones-metodo img {
+    width: 50px;
+    height: 50px;
+}
+.donaciones-metodo p {
+    margin-top: 10px;
+    color: #333;
+}
+
+/* footer */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.footer-section {
+    flex: 1;
+    margin: 10px;
+    min-width: 200px;
+}
+.footer-section h3 {
+    border-bottom: 2px solid #fff;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+.footer-section ul li {
+    margin: 10px 0;
+}
+.footer-section ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+.footer-section ul li a:hover {
+    text-decoration: underline;
+}
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+.footer-social a {
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+}
+.footer-social a:hover {
+    color: #ddd;
+}
+.footer-bottom {
+    margin-top: 20px;
+    border-top: 1px solid #444;
+    padding-top: 10px;
+}
+
