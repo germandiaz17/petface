@@ -22,11 +22,11 @@ export function Home({ user, setUser }) {
         <section className="hero">
           <h2>Encuentra tu Compañero Perfecto</h2>
           <p>Adopta una mascota y cambia una vida hoy mismo.</p>
-          <button>Explora Adopciones</button>
+          <a href="#explora">Explora Adopciones</a>
           <button onClick={handleLogout}>Cerrar Sesion</button>
         </section>
 
-        <section className="section">
+        <section className="section" id="explora">
           <h2>Animales Disponibles</h2>
           <p>
             Estos son nuestros animales que están buscando un hogar
@@ -37,7 +37,7 @@ export function Home({ user, setUser }) {
               nombre={"paris"}
               raza={"Calico"}
               desc={
-                "Paris es una gata Calico de 3 años. Su pelaje es una hermosa mezcla de negro, blanco y anaranjado, típico de su raza. Paris es una gata muy cariñosa y le encanta acurrucarse en el regazo de las personas. Es juguetona y curiosa, siempre explorando su entorno. Se lleva bien con otros gatos y es muy amigable con las personas. Paris está esterilizada, vacunada y en perfecto estado de salud. Está buscando un hogar amoroso donde pueda recibir y dar mucho amor."
+                "Calico, 3 años. Cariñosa y sociable, Paris está lista para llenar tu hogar de amor y alegría. Busca un compañero humano que comparta su afecto y le brinde la seguridad que necesita."
               }
               foto={imagenes.img1}
               genero={"Hembra"}
@@ -47,7 +47,7 @@ export function Home({ user, setUser }) {
               nombre={"Max"}
               raza={"Huskye"}
               desc={
-                "Max es un Labrador Retriever de 3 años, conocido por su pelaje dorado y su energía inagotable. Es un perro muy sociable y amigable, que disfruta de la compañía tanto de personas como de otros animales. Max adora jugar al aire libre, especialmente con pelotas y frisbees, y siempre está listo para una aventura. Es muy inteligente y ha sido entrenado en obediencia básica, lo que lo hace muy fácil de manejar. Max es ideal para una familia activa que pueda proporcionarle el ejercicio y la atención que necesita. Está vacunado, desparasitado y en perfecto estado de salud, listo para encontrar un hogar amoroso."
+                " Labrador Retriever, 3 años. Juguetón y bien entrenado, Max es el compañero perfecto para hogares activos. Con su naturaleza leal y enérgica, está listo para aventuras al aire libre y momentos de afecto en casa."
               }
               foto={imagenes.img2}
               genero={"Macho"}
@@ -57,7 +57,7 @@ export function Home({ user, setUser }) {
               nombre={"Bella"}
               raza={"Golden Retriever"}
               desc={
-                "Bella es una Golden Retriever de 2 años, con un pelaje dorado brillante y un carácter excepcionalmente cariñoso. Le encanta estar rodeada de personas y es especialmente buena con los niños, lo que la convierte en la mascota perfecta para familias. Bella disfruta de los paseos largos y es muy obediente, siempre lista para aprender nuevos trucos. Además, tiene un temperamento tranquilo y se lleva bien con otros animales. Bella está vacunada, esterilizada y ha recibido todas sus revisiones veterinarias, asegurando que está en óptimas condiciones de salud. Busca un hogar donde pueda recibir el amor y el cuidado que tanto merece."
+                "Golden Retriever, 2 años. Amorosa y obediente, Bella es la compañera ideal para familias. Con su disposición dulce y gentil, ilumina cualquier hogar con amor incondicional y lealtad."
               }
               foto={imagenes.img3}
               genero={"Hembra"}
@@ -67,7 +67,7 @@ export function Home({ user, setUser }) {
               nombre={"Luna"}
               raza={"Hembra"}
               desc={
-                "Luna es una gata Siamés de 4 años, reconocida por su elegante pelaje color crema con puntos oscuros y sus impactantes ojos azules. Luna es una gata muy independiente, pero también muy afectuosa cuando se siente cómoda. Le gusta pasar tiempo en lugares altos observando todo a su alrededor, y es muy curiosa por naturaleza. Luna es perfecta para un hogar tranquilo, idealmente sin otros animales, donde pueda ser la reina del hogar. Le encanta jugar con juguetes interactivos y disfruta de las caricias. Luna está esterilizada, vacunada y en excelente estado de salud. Está buscando un hogar donde pueda sentirse segura y amada."
+                "Siamés, 4 años. Independiente y curiosa, Luna es la gata perfecta para hogares tranquilos. Busca un compañero humano tranquilo que aprecie su naturaleza reservada pero amorosa."
               }
               foto={imagenes.img4}
               genero={"Hembra"}

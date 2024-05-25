@@ -54,6 +54,20 @@ header h1 {
     font-size: 24px;
     margin-top: 10px;
 }
+.hero a{
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.hero a:hover {
+    background-color: #45a049;
+    color: #fff;
+}
+
 .hero button {
     background-color: #4cae4c;
     color: #fff;
