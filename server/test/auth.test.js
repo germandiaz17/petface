@@ -77,3 +77,15 @@ test('registro, sesión y logout', async () => {
   assert.equal((await api('GET', '/auth/me')).status, 401)
   assert.equal((await api('GET', '/auth/me', { cookie: 'token=falso' })).status, 401)
 })
+
+test('bloquea el login tras 5 intentos fallidos', async () => {
+  const intentar = (password) => api('POST', '/auth/login', { body: { email: EMAIL_NUEVO, password } })
+  for (let i = 0; i < 5; i++) assert.equal((await intentar('mala-clave')).status, 401)
+
+  const bloqueado = await intentar('clave-segura') // ni con la contraseña correcta
+  assert.equal(bloqueado.status, 429)
+  assert.match(bloqueado.datos.error, /Demasiados intentos/)
+
+  // otras cuentas no se ven afectadas
+  assert.equal((await api('POST', '/auth/login', { body: { email: 'ana@petface.com', password: 'ana12345' } })).status, 200)
+})

@@ -48,4 +48,6 @@ Relacionado: [[ADR-003 Autenticación con JWT en cookie]].
 - `pages/Login.jsx`, `pages/Registro.jsx`, `pages/AuthLayout.jsx`, `pages/auth.css`: diseño a dos columnas (foto + formulario) que en móvil queda en una; validación por campo, mostrar/ocultar contraseña, botón con estado de carga, error general, redirección a la página de origen. En modo desarrollo muestra las cuentas de prueba.
 - "Adoptar" sin sesión → `/login` y vuelve a la página después de entrar.
 
-**Pendiente / ideas**: limitar intentos de login (rate limit), "olvidé mi contraseña", editar perfil.
+**Límite de intentos (Fase 6)**: `utils/limiteLogin.js` cuenta los fallos por email en memoria; tras 5 fallos en 15 minutos responde `429` (ni siquiera con la contraseña correcta). Se reinicia al reiniciar el servidor, suficiente para el alcance del proyecto.
+
+**Pendiente / ideas**: "olvidé mi contraseña", editar perfil.

@@ -46,8 +46,19 @@ actualizado: 2026-10-18
 - [x] Subir fotos de mascotas desde el admin
 - [x] Revisión visual completa y detalles finos (títulos de pestaña, skeletons, 404, accesibilidad)
 
-## Fase 6 — Calidad y entrega
+## Fase 6 — Calidad y entrega ✅
 - [x] Lint en 0 errores (desde la Fase 3)
-- [x] Pruebas básicas de la API (`npm test`, 16 pruebas)
-- [ ] README con instrucciones y capturas
-- [ ] Datos de demo y usuario admin para la presentación
+- [x] Pruebas básicas de la API (`npm test`, 17 pruebas)
+- [x] README con instrucciones y capturas
+- [x] Datos de demo y usuario admin para la presentación
+- [x] Límite de intentos de login
+- [x] [[Guía de sustentación]]
+- [x] Fusionar `robustecer` en `master`
+
+## Ideas a futuro (fuera del alcance)
+- [ ] Recuperar contraseña por email
+- [ ] Editar perfil (nombre, teléfono, contraseña)
+- [ ] Notificar por email al aprobar/rechazar una solicitud
+- [ ] Paginación del catálogo
+- [ ] Pasarela de pagos real para donaciones
+- [ ] Despliegue en la nube (Render / Railway + Postgres gestionado)

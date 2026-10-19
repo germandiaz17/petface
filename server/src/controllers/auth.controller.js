@@ -4,6 +4,7 @@ import * as Usuario from '../models/usuario.model.js'
 import { JWT_SECRET } from '../middlewares/auth.js'
 import { HttpError } from '../utils/httpError.js'
 import * as v from '../utils/validar.js'
+import * as limite from '../utils/limiteLogin.js'
 
 // CONTROLADOR Auth: registro, login, logout y sesión actual.
 
@@ -47,11 +48,18 @@ export async function login(req, res) {
   const email = v.email(req.body?.email)
   const password = typeof req.body?.password === 'string' ? req.body.password : ''
 
+  const minutos = limite.minutosBloqueado(email)
+  if (minutos > 0) {
+    throw new HttpError(429, `Demasiados intentos fallidos. Intenta de nuevo en ${minutos} ${minutos === 1 ? 'minuto' : 'minutos'}.`)
+  }
+
   const usuario = await Usuario.findByEmailConPassword(email)
   // Mismo mensaje si falla el email o la contraseña: no revelamos qué emails existen
   if (!usuario || !(await bcrypt.compare(password, usuario.password_hash))) {
+    limite.registrarFallo(email)
     throw new HttpError(401, 'Email o contraseña incorrectos')
   }
+  limite.limpiar(email)
   iniciarSesion(res, usuario)
   res.json(publico(usuario))
 }

@@ -74,7 +74,8 @@ export function Login() {
       {import.meta.env.DEV && (
         <div className="auth__demo">
           Cuentas de prueba: <code>admin@petface.com</code> / <code>admin123</code> ·{' '}
-          <code>ana@petface.com</code> / <code>ana12345</code>
+          <code>ana@petface.com</code> / <code>ana12345</code> ·{' '}
+          <code>carlos@petface.com</code> / <code>carlos123</code>
         </div>
       )}
     </AuthLayout>

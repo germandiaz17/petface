@@ -2,10 +2,12 @@
 -- Usuarios de demo (contraseñas cifradas con bcrypt vía pgcrypto):
 --   admin@petface.com   / admin123
 --   ana@petface.com     / ana12345
+--   carlos@petface.com  / carlos123
 
 INSERT INTO usuarios (nombre, email, password_hash, telefono, rol) VALUES
   ('Administrador', 'admin@petface.com', crypt('admin123', gen_salt('bf', 10)), '+57 300 000 0000', 'admin'),
-  ('Ana Rodríguez', 'ana@petface.com',   crypt('ana12345', gen_salt('bf', 10)), '+57 300 111 2233', 'adoptante');
+  ('Ana Rodríguez', 'ana@petface.com',   crypt('ana12345', gen_salt('bf', 10)), '+57 300 111 2233', 'adoptante'),
+  ('Carlos Mejía',  'carlos@petface.com', crypt('carlos123', gen_salt('bf', 10)), '+57 310 444 5566', 'adoptante');
 
 -- Las 4 mascotas del proyecto original, con los datos corregidos
 INSERT INTO mascotas (nombre, especie, raza, edad_meses, genero, tamano, descripcion, foto_url) VALUES
@@ -30,3 +32,32 @@ INSERT INTO testimonios (autor, texto, aprobado) VALUES
   ('Sergio T.', 'La dedicación y el amor que PetFace pone en cuidar a los animales es increíble. Adoptar a Toby fue la mejor decisión que pudimos tomar.', TRUE),
   ('Paula S.',  'Gracias a PetFace, pudimos darle a Max un hogar lleno de amor. La adopción fue una experiencia maravillosa.', TRUE),
   ('Diana F.',  'Estamos muy agradecidos con PetFace por ayudarnos a encontrar a nuestro adorable gato, Oliver. Él ha llenado nuestra casa de alegría.', TRUE);
+
+-- ---------------------------------------------------------------
+-- Actividad de demo (para que el panel de admin no se vea vacío)
+-- ---------------------------------------------------------------
+
+-- Dos personas quieren a Max (pendientes) y Carlos tuvo una solicitud rechazada para Bella
+INSERT INTO solicitudes (usuario_id, mascota_id, mensaje, telefono_contacto, estado, creado_en) VALUES
+  ((SELECT id FROM usuarios WHERE email = 'ana@petface.com'),    (SELECT id FROM mascotas WHERE nombre = 'Max'),
+   'Vivo en una casa con patio grande y salgo a correr todas las mañanas. Max sería el compañero ideal.',
+   '+57 300 111 2233', 'pendiente', NOW() - INTERVAL '2 days'),
+  ((SELECT id FROM usuarios WHERE email = 'carlos@petface.com'), (SELECT id FROM mascotas WHERE nombre = 'Max'),
+   'Tengo experiencia con perros grandes y trabajo desde casa.',
+   '+57 310 444 5566', 'pendiente', NOW() - INTERVAL '1 day'),
+  ((SELECT id FROM usuarios WHERE email = 'carlos@petface.com'), (SELECT id FROM mascotas WHERE nombre = 'Bella'),
+   'Me encantaría adoptarla para mis hijos.',
+   '+57 310 444 5566', 'rechazada', NOW() - INTERVAL '10 days');
+
+-- Max tiene solicitudes pendientes → está "en proceso"
+UPDATE mascotas SET estado = 'en_proceso' WHERE nombre = 'Max';
+
+INSERT INTO donaciones (usuario_id, nombre, email, monto, creado_en) VALUES
+  ((SELECT id FROM usuarios WHERE email = 'ana@petface.com'), 'Ana Rodríguez', 'ana@petface.com', 50000, NOW() - INTERVAL '5 days'),
+  (NULL, 'Laura Gómez', 'laura@correo.com', 20000, NOW() - INTERVAL '3 days'),
+  (NULL, 'Anónimo',     'donante@correo.com', 100000, NOW() - INTERVAL '1 day');
+
+-- Un testimonio esperando aprobación
+INSERT INTO testimonios (usuario_id, autor, texto, aprobado) VALUES
+  ((SELECT id FROM usuarios WHERE email = 'carlos@petface.com'), 'Carlos Mejía',
+   'Aunque no pude adoptar a Bella, el equipo me orientó muy bien y sigo buscando a mi compañero.', FALSE);
