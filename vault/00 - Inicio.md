@@ -26,7 +26,7 @@ PetFace es una web de **adopción de mascotas** (proyecto universitario). Este v
 - [[API REST]] — endpoints
 - [[Autenticación]] — el login nuevo
 - [[Secciones de la app]] — páginas y rutas
-- [[Plan sistemas distribuidos]] — microservicio de notificaciones, eventos, gateway y réplicas *(propuesta)*
+- [[Plan sistemas distribuidos]] — microservicio de notificaciones, eventos, gateway y réplicas *(implementado)*
 
 ### 03 · Roadmap
 - [[Roadmap]] — fases con checklist
@@ -38,6 +38,7 @@ PetFace es una web de **adopción de mascotas** (proyecto universitario). Este v
 - [[ADR-004 Estructura del repositorio]]
 - [[ADR-005 Fotos en disco local]]
 - [[ADR-006 Despliegue en Vercel]]
+- [[ADR-007 Sistema distribuido simple]]
 
 ### 05 · Diseño
 - [[Guía de diseño]]
@@ -54,3 +55,4 @@ PetFace es una web de **adopción de mascotas** (proyecto universitario). Este v
 - [[2026-10-18 Fase 5 diseño]]
 - [[2026-10-18 Fase 6 entrega]]
 - [[2026-10-18 Despliegue Vercel]]
+- [[2026-10-18 Sistema distribuido]]

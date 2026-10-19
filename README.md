@@ -64,6 +64,33 @@ flowchart LR
 
 Ejemplo del recorrido de una petición: `PUT /api/mascotas/3` → `routes/mascotas.routes.js` (exige admin) → `controllers/mascotas.controller.js` (valida los datos) → `models/mascota.model.js` (ejecuta el `UPDATE`) → respuesta JSON.
 
+## Sistema distribuido
+
+Además de la API principal, PetFace tiene un **microservicio de notificaciones** independiente. Con Docker se levanta todo el sistema distribuido: un **gateway Nginx** que reparte la carga entre **2 réplicas de la API**, el microservicio y PostgreSQL.
+
+```mermaid
+flowchart LR
+  B[Navegador] --> G[Gateway Nginx :8080<br/>balanceo de carga]
+  G -->|/| WEB[Web React]
+  G -->|/api| A1[API réplica 1]
+  G -->|/api| A2[API réplica 2]
+  G -->|/notif| N[Microservicio de<br/>notificaciones]
+  A1 & A2 -->|HTTP: eventos| N
+  A1 & A2 --> DB[(PostgreSQL)]
+  N --> DB
+```
+
+```bash
+npm run distribuido         # construye y levanta los 5 contenedores → http://localhost:8080
+npm run distribuido:ps      # ver los contenedores
+npm run distribuido:down    # detenerlos
+```
+
+- **Microservicio**: la API avisa por HTTP ("se aprobó una solicitud", "llegó una donación") y el microservicio crea los avisos que el usuario ve en la campana 🔔.
+- **Balanceo de carga**: en *Admin → Resumen → Sistema distribuido* se ve qué réplica (`api-1` / `api-2`) atiende cada petición.
+- **Tolerancia a fallos**: `docker stop petface-api-1 petface-notificaciones` → la app sigue funcionando con la otra réplica y sin avisos.
+- **En Vercel**: el microservicio es otra función (`api/notif.js`) y `vercel.json` hace de gateway.
+
 ## Puesta en marcha
 
 **Requisitos:** Node.js 22 o superior y Docker con Docker Compose.
@@ -72,7 +99,7 @@ Ejemplo del recorrido de una petición: `PUT /api/mascotas/3` → `routes/mascot
 npm install                         # instala client y server (npm workspaces)
 cp server/.env.example server/.env  # variables de entorno del backend
 npm run db:up                       # levanta PostgreSQL con tablas y datos de prueba
-npm run dev                         # API en :3000 y web en :5173
+npm run dev                         # API :3000, notificaciones :3001 y web :5173
 ```
 
 Abre **http://localhost:5173**.
@@ -105,7 +132,8 @@ El repositorio está listo para Vercel (`vercel.json`): la web se publica como s
 
 | Comando | Qué hace |
 |---|---|
-| `npm run dev` | Levanta backend y frontend a la vez |
+| `npm run dev` | Levanta API, microservicio de notificaciones y web |
+| `npm run distribuido` | Sistema distribuido completo en Docker (gateway + 2 réplicas + microservicio) |
 | `npm run dev:client` / `dev:server` | Solo uno de los dos |
 | `npm test` | Pruebas de la API (requiere la BD encendida) |
 | `npm run lint` | Revisa el código del frontend |
@@ -131,10 +159,13 @@ server/src/
   controllers/       CONTROLADOR: validación y lógica de cada petición
   routes/            URL → controlador
   middlewares/       autenticación, subida de fotos, errores
-server/test/         pruebas de la API
+server/test/         pruebas de la API (incluye integración entre servicios)
+notificaciones/      MICROSERVICIO de notificaciones (también MVC: models, controllers, routes)
+gateway/             Nginx: gateway y balanceador de carga (Docker)
 server/uploads/      fotos subidas en local (en Vercel van a Vercel Blob)
 server/scripts/      migrar.js: prepara la BD en cada despliegue
 api/index.js         entrada de la API en Vercel
+api/notif.js         entrada del microservicio en Vercel
 database/            schema.sql (tablas) y seed.sql (datos de prueba)
 vault/               documentación del proyecto (Obsidian)
 ```

@@ -1,0 +1,19 @@
+{
+  "name": "petface-notificaciones",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Microservicio de notificaciones de PetFace",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch --env-file-if-exists=../server/.env src/server.js",
+    "start": "node src/server.js",
+    "test": "node --env-file-if-exists=../server/.env --test"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1"
+  }
+}

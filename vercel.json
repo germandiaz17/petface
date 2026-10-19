@@ -6,6 +6,10 @@
   "outputDirectory": "client/dist",
   "rewrites": [
     {
+      "source": "/notif/(.*)",
+      "destination": "/api/notif"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "/api"
     },

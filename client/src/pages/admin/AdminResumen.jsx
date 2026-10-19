@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useApi } from '../../hooks/useApi'
 import { Cargando, ErrorCarga } from '../../components/Estados'
 import { dinero } from '../../utils/formato'
+import { SistemaDistribuido } from './SistemaDistribuido'
 
 export function AdminResumen() {
   const { datos, cargando, error, recargar } = useApi('/admin/resumen')
@@ -19,6 +20,7 @@ export function AdminResumen() {
   ]
 
   return (
+    <>
     <div className="stats">
       {STATS.map((s) => (
         <Link key={s.etiqueta} to={s.to} className={`tarjeta stat ${s.destacada ? 'stat--destacada' : ''}`}>
@@ -27,5 +29,7 @@ export function AdminResumen() {
         </Link>
       ))}
     </div>
+    <SistemaDistribuido />
+    </>
   )
 }

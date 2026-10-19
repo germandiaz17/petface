@@ -1,6 +1,7 @@
 import * as Solicitud from '../models/solicitud.model.js'
 import { HttpError } from '../utils/httpError.js'
 import * as v from '../utils/validar.js'
+import { enviarEvento } from '../services/notificador.js'
 
 // CONTROLADOR Solicitudes de adopción
 
@@ -13,6 +14,8 @@ export async function crear(req, res) {
     mensaje: v.texto(body.mensaje, 'mensaje', { max: 1000 }),
     telefono_contacto: v.texto(body.telefono_contacto, 'telefono_contacto', { requerido: true, max: 30 }),
   })
+  const detalle = await Solicitud.findById(solicitud.id)
+  await enviarEvento('solicitud.creada', detalle) // → microservicio de notificaciones
   res.status(201).json(solicitud)
 }
 
@@ -40,5 +43,6 @@ export async function cambiarEstado(req, res) {
   await Solicitud.cambiarEstado(id, estado)
   const actualizada = await Solicitud.findById(id)
   if (!actualizada) throw new HttpError(404, 'Solicitud no encontrada')
+  await enviarEvento(`solicitud.${estado}`, actualizada) // aprobada | rechazada
   res.json(actualizada)
 }

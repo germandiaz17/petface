@@ -1,6 +1,7 @@
 import * as Testimonio from '../models/testimonio.model.js'
 import { HttpError } from '../utils/httpError.js'
 import * as v from '../utils/validar.js'
+import { enviarEvento } from '../services/notificador.js'
 
 // CONTROLADOR Testimonios
 
@@ -21,6 +22,7 @@ export async function crear(req, res) {
     autor: req.user.nombre,
     texto: v.texto(req.body?.texto, 'texto', { requerido: true, max: 1000 }),
   })
+  await enviarEvento('testimonio.creado', testimonio)
   res.status(201).json(testimonio)
 }
 

@@ -221,3 +221,69 @@ a.stat:hover {
     justify-content: flex-start;
   }
 }
+
+/* Tarjeta "Sistema distribuido" */
+.sistema {
+  margin-top: 1.5rem;
+}
+.sistema__cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.sistema__cabecera h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+.sistema__cabecera p {
+  margin: 0.25rem 0 0;
+  color: var(--color-texto-suave);
+}
+.sistema__resultado {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-borde);
+}
+.sistema__resultado h3 {
+  font-size: 1rem;
+  margin-bottom: 0.6rem;
+}
+.sistema__peticiones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.sistema__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: 999px;
+}
+.sistema__chip span {
+  opacity: 0.6;
+}
+.sistema__chip small {
+  font-weight: 500;
+  opacity: 0.7;
+}
+.sistema__chip--0 { background: #dcfce7; color: #166534; }
+.sistema__chip--1 { background: #dbeafe; color: #1e40af; }
+.sistema__chip--2 { background: #fef3c7; color: #92400e; }
+.sistema__chip--3 { background: #f3e8ff; color: #6b21a8; }
+.sistema__chip--error { background: #fee2e2; color: #991b1b; }
+.sistema__estado {
+  margin: 0;
+  font-weight: 700;
+}
+.sistema__estado--ok { color: #166534; }
+.sistema__estado--error { color: var(--color-error); }

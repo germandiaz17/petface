@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/auth'
 import { Logo } from '../Logo'
+import { Campana } from './Campana'
 import './navbar.css'
 
 const ENLACES = [
@@ -33,6 +34,12 @@ export function Navbar() {
         <Link to="/" className="navbar__marca" aria-label="PetFace, inicio">
           <Logo />
         </Link>
+
+        {user && (
+          <div className="navbar__campana">
+            <Campana />
+          </div>
+        )}
 
         <button
           className="navbar__toggle"

@@ -1,5 +1,6 @@
 import * as Donacion from '../models/donacion.model.js'
 import * as v from '../utils/validar.js'
+import { enviarEvento } from '../services/notificador.js'
 
 // CONTROLADOR Donaciones (simuladas)
 
@@ -12,6 +13,7 @@ export async function crear(req, res) {
     email: v.email(body.email),
     monto: v.numero(body.monto, 'monto', { requerido: true }),
   })
+  await enviarEvento('donacion.recibida', donacion)
   res.status(201).json(donacion)
 }
 

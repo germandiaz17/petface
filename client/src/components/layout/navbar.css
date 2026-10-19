@@ -15,6 +15,9 @@
 .navbar__marca {
   text-decoration: none;
 }
+.navbar__campana {
+  order: 2; /* en escritorio va a la derecha, después del menú */
+}
 .navbar__toggle {
   display: none;
   margin-left: auto;
@@ -27,6 +30,7 @@
   cursor: pointer;
 }
 .navbar__menu {
+  order: 1;
   flex: 1;
   display: flex;
   align-items: center;
@@ -93,6 +97,11 @@
 @media (max-width: 860px) {
   .navbar__toggle {
     display: block;
+    order: 3;
+    margin-left: 0;
+  }
+  .navbar__campana {
+    margin-left: auto;
   }
   .navbar__menu {
     display: none;

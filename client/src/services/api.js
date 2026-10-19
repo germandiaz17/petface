@@ -8,10 +8,11 @@ export class ApiError extends Error {
   }
 }
 
-async function request(metodo, ruta, body) {
+// base: '/api' (API principal) o '/notif' (microservicio de notificaciones)
+async function request(metodo, ruta, body, base = '/api') {
   let res
   try {
-    res = await fetch(`/api${ruta}`, {
+    res = await fetch(`${base}${ruta}`, {
       method: metodo,
       credentials: 'include', // envía la cookie de sesión
       // FormData (archivos) lo envía el navegador con su propio Content-Type
@@ -26,6 +27,12 @@ async function request(metodo, ruta, body) {
   const datos = await res.json().catch(() => null)
   if (!res.ok) throw new ApiError(res.status, datos?.error ?? 'Ocurrió un error inesperado')
   return datos
+}
+
+// Microservicio de notificaciones: otro servidor, misma sesión (el gateway lo enruta en /notif)
+export const notif = {
+  get: (ruta) => request('GET', ruta, undefined, '/notif'),
+  patch: (ruta) => request('PATCH', ruta, undefined, '/notif'),
 }
 
 export const api = {

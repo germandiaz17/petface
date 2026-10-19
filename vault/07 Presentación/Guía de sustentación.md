@@ -7,7 +7,8 @@ actualizado: 2026-10-18
 ## Checklist antes de presentar
 - [ ] Docker encendido: `sudo systemctl start docker`
 - [ ] Datos limpios: `npm run db:reset` (deja 3 usuarios, 4 mascotas, 2 solicitudes pendientes para Max, 3 donaciones, 1 testimonio por revisar)
-- [ ] `npm test` en verde (17 pruebas)
+- [ ] `npm test` en verde (24 pruebas: 19 de la API + 5 del microservicio)
+- [ ] Para la parte distribuida: `npm run distribuido` → http://localhost:8080
 - [ ] `npm run dev` y abrir http://localhost:5173
 - [ ] Dos ventanas del navegador: una normal (adoptante) y otra en incógnito (admin), para mostrar ambos lados sin cerrar sesión
 - [ ] Tener a mano una foto de mascota para subirla en vivo
@@ -23,6 +24,20 @@ actualizado: 2026-10-18
 5. **Volver al adoptante** (30 s): recargar Mi perfil → la solicitud ahora dice "Aprobada".
 6. **Móvil** (30 s): herramientas de desarrollador → vista móvil → menú hamburguesa y tablas convertidas en tarjetas.
 7. **Código** (1 min): mostrar el recorrido MVC (abajo) y `npm test`.
+
+## Sistema distribuido (demo de 2 minutos)
+Antes: `npm run distribuido` y abrir **http://localhost:8080** (no el 5173).
+1. **Arquitectura**: mostrar el diagrama del README: gateway → 2 réplicas de la API + microservicio de notificaciones.
+2. **Balanceo de carga**: *Admin → Resumen → Probar balanceo* → las peticiones se reparten entre `api-1` y `api-2`.
+3. **Comunicación entre servicios**: en otra ventana, Ana solicita adoptar a una mascota → la campana 🔔 del admin muestra el aviso. Explicar: la API no guarda notificaciones; le *avisa* al microservicio por HTTP y él decide qué notificar.
+4. **Tolerancia a fallos**: en la terminal `docker stop petface-api-1 petface-notificaciones` → *Probar balanceo* muestra solo `api-2` y el microservicio "sin respuesta", pero se puede seguir donando y adoptando. Luego `docker start petface-api-1 petface-notificaciones`.
+5. **MVC + distribuido**: cada servicio es MVC por dentro (mostrar `notificaciones/src/models`, `controllers`, `routes`); la distribución está *entre* servicios.
+
+**Preguntas probables**
+- *¿Por qué no RabbitMQ?* Para mantenerlo simple y que funcione igual en Vercel (que no permite procesos siempre encendidos). Con HTTP + tiempo límite ya se demuestra comunicación entre servicios y tolerancia a fallos.
+- *¿Cómo sabe el microservicio quién es el usuario?* Valida el mismo JWT que emite la API; no necesita preguntarle a nadie.
+- *¿Por qué cualquier réplica puede atender a cualquier usuario?* Porque la API no guarda sesiones en memoria: la sesión viaja en el JWT (servicios *stateless*).
+- *¿Qué se pierde si el microservicio está caído?* Solo el aviso de ese momento; la operación principal se completa.
 
 ## Cómo explicar el MVC con un ejemplo real
 Petición: el admin aprueba una solicitud → `PATCH /api/solicitudes/5 { estado: 'aprobada' }`

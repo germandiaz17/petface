@@ -10,6 +10,8 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:3000',
       '/uploads': 'http://localhost:3000',
+      // Microservicio de notificaciones (otro servidor)
+      '/notif': 'http://localhost:3001',
     },
   },
 })

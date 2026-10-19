@@ -1,3 +1,30 @@
+# PetFace con Docker Compose
+#
+#   npm run db:up          → solo PostgreSQL (para desarrollar con npm run dev)
+#   npm run distribuido    → TODO el sistema distribuido en contenedores, en http://localhost:8080
+#
+#   Navegador → gateway (Nginx) → api-1 / api-2 (réplicas) → PostgreSQL
+#                               → notificaciones (microservicio) → PostgreSQL
+
+# Configuración común de las réplicas de la API
+x-api: &api
+  build:
+    context: .
+    dockerfile: server/Dockerfile
+  image: petface-api
+  profiles: [distribuido]
+  restart: unless-stopped
+  volumes:
+    - uploads:/app/uploads # las fotos se comparten entre réplicas
+  depends_on:
+    db:
+      condition: service_healthy
+
+x-api-env: &api-env
+  DATABASE_URL: postgres://petface:petface@db:5432/petface
+  JWT_SECRET: secreto-de-la-demo-distribuida
+  NOTIF_URL: http://notificaciones:3001
+
 services:
   db:
     image: postgres:16-alpine
@@ -20,5 +47,52 @@ services:
       timeout: 3s
       retries: 10
 
+  # Dos réplicas de la misma API
+  api-1:
+    <<: *api
+    container_name: petface-api-1
+    environment:
+      <<: *api-env
+      INSTANCIA: api-1
+
+  api-2:
+    <<: *api
+    container_name: petface-api-2
+    environment:
+      <<: *api-env
+      INSTANCIA: api-2
+
+  # Microservicio de notificaciones
+  notificaciones:
+    build:
+      context: .
+      dockerfile: notificaciones/Dockerfile
+    container_name: petface-notificaciones
+    profiles: [distribuido]
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://petface:petface@db:5432/petface
+      JWT_SECRET: secreto-de-la-demo-distribuida
+      INSTANCIA: notificaciones
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Gateway: web + enrutamiento + balanceo de carga
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
+    container_name: petface-gateway
+    profiles: [distribuido]
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - api-1
+      - api-2
+      - notificaciones
+
 volumes:
   pgdata:
+  uploads:
