@@ -19,5 +19,7 @@ fecha: 2026-10-18
 - Verificado en producción: `/api/health` → `db: ok, mascotas: 4`; catálogo con filtros, detalle de mascota, testimonios; rutas protegidas responden 401 sin sesión; rutas de la SPA (p. ej. una URL inexistente) devuelven la app; sin errores en consola.
 - No verificado por Claude (requiere escribir contraseñas en un sitio público): login, panel de admin y subida de fotos a Blob → probar a mano.
 
-## ⚠️ Pendiente importante
+## Riesgo aceptado
+> [!note] Decisión del equipo (2026-10-18): es un proyecto universitario; la prioridad es que la app funcione y mostrar/justificar el MVC. Se deja así.
+
 Las contraseñas de demo (`admin123`, etc.) están publicadas en el README y el seed, y ahora la web es pública: **cualquiera puede entrar como admin**. Cambiar la contraseña del admin en producción (no hay pantalla para hacerlo todavía; se puede con SQL en la consola de Neon o agregando "cambiar contraseña" al perfil).
