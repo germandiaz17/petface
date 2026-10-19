@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Obsidian (estado local del editor)
+vault/.obsidian/workspace*.json
+vault/.obsidian/cache
+
+# Variables de entorno
+.env
+!.env.example
