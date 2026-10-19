@@ -1,7 +1,26 @@
 // Manejador central de errores: cualquier error lanzado en un controlador llega aquí.
+// Express 5 captura también los errores de funciones async.
+
+// Códigos de error de PostgreSQL → respuesta HTTP entendible
+const ERRORES_PG = {
+  23505: [409, 'Ya existe un registro con esos datos'], // unique_violation
+  23503: [400, 'El registro relacionado no existe'], // foreign_key_violation
+  23514: [400, 'Algún valor no es válido'], // check_violation
+  '22P02': [400, 'Formato de dato inválido'], // invalid_text_representation
+}
+
 // eslint-disable-next-line no-unused-vars
 export function errorHandler(err, req, res, next) {
+  if (err.status) {
+    return res.status(err.status).json({ error: err.message })
+  }
+  if (err.type === 'entity.parse.failed') {
+    return res.status(400).json({ error: 'El cuerpo de la petición no es JSON válido' })
+  }
+  if (ERRORES_PG[err.code]) {
+    const [status, mensaje] = ERRORES_PG[err.code]
+    return res.status(status).json({ error: mensaje })
+  }
   console.error(err)
-  const status = err.status ?? 500
-  res.status(status).json({ error: status === 500 ? 'Error interno del servidor' : err.message })
+  res.status(500).json({ error: 'Error interno del servidor' })
 }

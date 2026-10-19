@@ -65,3 +65,11 @@ Relacionado: [[ADR-001 Stack backend]], [[ADR-004 Estructura del repositorio]], 
 - Vite redirige `/api` → `http://localhost:3000` (proxy), así no hace falta CORS.
 - Ejemplo completo de MVC: `GET /api/health` → `routes/health.routes.js` → `controllers/health.controller.js` → `models/health.model.js` → PostgreSQL.
 - Las fotos de mascotas se movieron a `client/public/img/mascotas/` para que la columna `foto_url` de la BD apunte a ellas (`/img/mascotas/paris.jpg`).
+
+## Implementado en Fase 2
+- **4 recursos** con su modelo, controlador y rutas: mascotas, solicitudes, donaciones, testimonios (+ `admin/resumen`).
+- `utils/validar.js`: validadores pequeños hechos a mano (texto, opción, entero, número, email, id). Lanzan `HttpError(400)`.
+- `utils/httpError.js` + `middlewares/errorHandler.js`: un solo lugar para convertir errores en respuestas JSON (incluye códigos de PostgreSQL → 409/400).
+- Express 5 captura los errores de funciones `async`, por eso los controladores no necesitan `try/catch`.
+- Las reglas de negocio de adopción viven en `models/solicitud.model.js` y usan **transacciones** (`BEGIN/COMMIT/ROLLBACK`) con `SELECT ... FOR UPDATE`.
+- Pruebas en `server/test/api.test.js` con `node:test` (sin librerías extra) → `npm test`.

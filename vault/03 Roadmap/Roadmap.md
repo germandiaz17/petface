@@ -18,13 +18,15 @@ actualizado: 2026-10-18
 - [x] Scripts `npm run dev` que levanten front y back
 - [x] `.env.example`, README real
 
-## Fase 2 — Backend
+## Fase 2 — Backend ✅
 - [x] Conexión a BD (`pg`) — `server/src/config/db.js`
-- [ ] Modelos: Usuario, Mascota, Solicitud, Donacion, Testimonio
-- [ ] Controladores + rutas según [[API REST]]
-- [ ] Middleware de errores y validación
+- [x] Modelos: Mascota, Solicitud, Donacion, Testimonio (Usuario → Fase 3)
+- [x] Controladores + rutas según [[API REST]]
+- [x] Middleware de errores y validación
 
 ## Fase 3 — Login real
+- [x] Middleware JWT (`cargarUsuario`, `requireAuth`, `requireAdmin`) — adelantado en Fase 2
+- [ ] Modelo Usuario
 - [ ] Registro / login / logout / me con bcrypt + JWT ([[Autenticación]])
 - [ ] AuthContext y rutas protegidas en React
 
@@ -43,6 +45,6 @@ actualizado: 2026-10-18
 
 ## Fase 6 — Calidad y entrega
 - [ ] Lint en 0 errores
-- [ ] Pruebas básicas de la API
+- [x] Pruebas básicas de la API (`npm test`, 8 pruebas)
 - [ ] README con instrucciones y capturas
 - [ ] Datos de demo y usuario admin para la presentación

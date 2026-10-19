@@ -27,6 +27,7 @@ Abre http://localhost:5173. Para comprobar la API y la BD: http://localhost:5173
 | `npm run dev:client` / `dev:server` | Solo uno de los dos |
 | `npm run build` | Compila el frontend |
 | `npm run lint` | Revisa el código del frontend |
+| `npm test` | Pruebas de la API (requiere la BD encendida) |
 | `npm run db:up` / `db:down` | Enciende / apaga PostgreSQL |
 | `npm run db:reset` | **Borra** la BD y la recrea desde `database/*.sql` |
 | `npm run db:psql` | Consola SQL dentro del contenedor |
@@ -42,6 +43,13 @@ server/src/
   middlewares/     errores, autenticación…
 database/          schema.sql y seed.sql
 vault/             documentación (Obsidian)
+```
+
+## API
+Endpoints documentados en `vault/02 Arquitectura/API REST.md`. Ejemplos:
+```bash
+curl "localhost:3000/api/mascotas?especie=gato"
+curl localhost:3000/api/testimonios
 ```
 
 ## Usuarios de prueba

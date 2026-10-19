@@ -17,7 +17,8 @@
     "db:down": "docker compose down",
     "db:reset": "docker compose down -v && docker compose up -d db",
     "db:logs": "docker compose logs -f db",
-    "db:psql": "docker compose exec db psql -U petface -d petface"
+    "db:psql": "docker compose exec db psql -U petface -d petface",
+    "test": "npm test -w server"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

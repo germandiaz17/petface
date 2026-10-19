@@ -61,8 +61,10 @@ erDiagram
   }
 ```
 
-## Reglas de negocio
-- Una mascota `adoptada` no aparece como disponible ni acepta solicitudes.
+## Reglas de negocio (implementadas en `solicitud.model.js`)
+- Una mascota `adoptada` no acepta solicitudes.
+- Al crear una solicitud, una mascota `disponible` pasa a `en_proceso`.
+- Al rechazar o cancelar, si no quedan solicitudes pendientes, la mascota vuelve a `disponible`.
 - Al **aprobar** una solicitud → la mascota pasa a `adoptada` y las demás solicitudes de esa mascota a `rechazada`.
 - Un usuario no puede tener dos solicitudes `pendiente` para la misma mascota.
 - Solo `admin` crea/edita/borra mascotas y gestiona solicitudes.
