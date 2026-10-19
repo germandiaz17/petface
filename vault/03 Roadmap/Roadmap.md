@@ -24,11 +24,11 @@ actualizado: 2026-10-18
 - [x] Controladores + rutas según [[API REST]]
 - [x] Middleware de errores y validación
 
-## Fase 3 — Login real
+## Fase 3 — Login real ✅
 - [x] Middleware JWT (`cargarUsuario`, `requireAuth`, `requireAdmin`) — adelantado en Fase 2
-- [ ] Modelo Usuario
-- [ ] Registro / login / logout / me con bcrypt + JWT ([[Autenticación]])
-- [ ] AuthContext y rutas protegidas en React
+- [x] Modelo Usuario
+- [x] Registro / login / logout / me con bcrypt + JWT ([[Autenticación]])
+- [x] AuthContext, rutas protegidas y pantallas de login/registro rediseñadas
 
 ## Fase 4 — CRUD y secciones
 - [ ] Router con todas las [[Secciones de la app]]
@@ -44,7 +44,7 @@ actualizado: 2026-10-18
 - [ ] Optimizar imágenes
 
 ## Fase 6 — Calidad y entrega
-- [ ] Lint en 0 errores
-- [x] Pruebas básicas de la API (`npm test`, 8 pruebas)
+- [x] Lint en 0 errores (desde la Fase 3)
+- [x] Pruebas básicas de la API (`npm test`, 11 pruebas)
 - [ ] README con instrucciones y capturas
 - [ ] Datos de demo y usuario admin para la presentación

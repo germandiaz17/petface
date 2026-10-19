@@ -12,9 +12,11 @@ export function Carta({
 }) {
   if (!isOpen) return null;
 
-  const mostrarAlerta = (e) => {
+  // onSubmit (en lugar de onClick) para que el navegador valide los campos "required"
+  const enviar = (e) => {
     e.preventDefault()
     swal("¡Nos estaremos contactando contigo!")
+    closeModal()
   }
 
   return (
@@ -29,21 +31,21 @@ export function Carta({
           <h2>GENERO: {genero}</h2>
           <p>DESCRIPCION: {desc}</p>
           <h2>Deja tu Información de Contacto</h2>
-          <form id="contacto">
-            <div class="form-group">
-              <label for="nombre">Nombre:</label>
-              <input type="text" id="nombre" name="nombre" value={user} required />
+          <form id="contacto" onSubmit={enviar}>
+            <div className="form-group">
+              <label htmlFor="nombre">Nombre:</label>
+              <input type="text" id="nombre" name="nombre" defaultValue={user?.nombre} required />
             </div>
-            <div class="form-group">
-              <label for="telefono">Número de Contacto:</label>
-              <input type="tel" id="telefono" name="telefono" required />
+            <div className="form-group">
+              <label htmlFor="telefono">Número de Contacto:</label>
+              <input type="tel" id="telefono" name="telefono" defaultValue={user?.telefono ?? ""} required />
             </div>
-            <div class="form-group">
-              <label for="correo">Correo Electrónico:</label>
-              <input type="email" id="correo" name="correo" required />
+            <div className="form-group">
+              <label htmlFor="correo">Correo Electrónico:</label>
+              <input type="email" id="correo" name="correo" defaultValue={user?.email} required />
             </div>
-            <button type="submit" onClick={mostrarAlerta}>Enviar</button>
-            <button onClick={() => closeModal(false)}>cerrar</button>
+            <button type="submit">Enviar</button>
+            <button type="button" onClick={closeModal}>Cerrar</button>
           </form>
 
         </div>

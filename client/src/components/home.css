@@ -254,3 +254,9 @@ header h1 {
     padding-top: 10px;
 }
 
+
+.hero .hero-login {
+    margin-left: 10px;
+    background-color: #fff;
+    color: #237a55;
+}

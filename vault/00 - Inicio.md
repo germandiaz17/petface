@@ -40,3 +40,4 @@ PetFace es una web de **adopción de mascotas** (proyecto universitario). Este v
 - [[2026-10-18 Análisis inicial]]
 - [[2026-10-18 Fase 1 estructura]]
 - [[2026-10-18 Fase 2 backend]]
+- [[2026-10-18 Fase 3 login]]

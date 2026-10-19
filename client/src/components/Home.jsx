@@ -1,11 +1,11 @@
 import "./home.css";
 import { Tarjeta } from "./Tarjeta";
 import imagenes from "../assets/imagenes";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/auth";
 
-export function Home({ user, setUser }) {
-  const handleLogout = () => {
-    setUser([]);
-  };
+export function Home() {
+  const { user, logout } = useAuth();
   return (
     <div>
         <div className="presentacion">
@@ -16,14 +16,18 @@ export function Home({ user, setUser }) {
 
         {/* INICIO */}
         <header>
-          <h1>{user}, Bienvenido a PetFace </h1>
+          <h1>{user ? `${user.nombre}, bienvenido a PetFace` : "Bienvenido a PetFace"}</h1>
         </header>
 
         <section className="hero">
           <h2>Encuentra tu Compañero Perfecto</h2>
           <p>Adopta una mascota y cambia una vida hoy mismo.</p>
           <a href="#explora">Explora Adopciones</a>
-          <button onClick={handleLogout}>Cerrar Sesion</button>
+          {user ? (
+            <button onClick={logout}>Cerrar sesión</button>
+          ) : (
+            <Link to="/login" className="hero-login">Iniciar sesión</Link>
+          )}
         </section>
 
         <section className="section" id="explora">
@@ -34,24 +38,22 @@ export function Home({ user, setUser }) {
           </p>
           <div className="listado">
             <Tarjeta
-              nombre={"paris"}
+              nombre={"Paris"}
               raza={"Calico"}
               desc={
                 "Calico, 3 años. Cariñosa y sociable, Paris está lista para llenar tu hogar de amor y alegría. Busca un compañero humano que comparta su afecto y le brinde la seguridad que necesita."
               }
               foto={imagenes.img1}
               genero={"Hembra"}
-              user={user}
             />
             <Tarjeta
               nombre={"Max"}
-              raza={"Huskye"}
+              raza={"Husky Siberiano"}
               desc={
-                " Labrador Retriever, 3 años. Juguetón y bien entrenado, Max es el compañero perfecto para hogares activos. Con su naturaleza leal y enérgica, está listo para aventuras al aire libre y momentos de afecto en casa."
+                "Husky Siberiano, 3 años. Juguetón y bien entrenado, Max es el compañero perfecto para hogares activos. Con su naturaleza leal y enérgica, está listo para aventuras al aire libre y momentos de afecto en casa."
               }
               foto={imagenes.img2}
               genero={"Macho"}
-              user={user}
             />
             <Tarjeta
               nombre={"Bella"}
@@ -61,17 +63,15 @@ export function Home({ user, setUser }) {
               }
               foto={imagenes.img3}
               genero={"Hembra"}
-              user={user}
             />
             <Tarjeta
               nombre={"Luna"}
-              raza={"Hembra"}
+              raza={"Siamés"}
               desc={
                 "Siamés, 4 años. Independiente y curiosa, Luna es la gata perfecta para hogares tranquilos. Busca un compañero humano tranquilo que aprecie su naturaleza reservada pero amorosa."
               }
               foto={imagenes.img4}
               genero={"Hembra"}
-              user={user}
             />
           </div>
         </section>
@@ -128,7 +128,7 @@ export function Home({ user, setUser }) {
           </p>
 
           <div className="donaciones-formulario">
-            <form className="/ruta/de/tu/formulario" method="post">
+            <form onSubmit={(e) => e.preventDefault()}>
               <input
                 type="text"
                 name="nombre"

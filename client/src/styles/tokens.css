@@ -1,0 +1,35 @@
+/* Tokens de diseño (ver vault/05 Diseño/Guía de diseño.md) */
+:root {
+  --color-primario: #2f9e6e;
+  --color-primario-oscuro: #237a55;
+  --color-primario-suave: #e6f5ee;
+  --color-acento: #f59e42;
+  --color-fondo: #fbfaf7;
+  --color-superficie: #ffffff;
+  --color-texto: #1f2937;
+  --color-texto-suave: #6b7280;
+  --color-borde: #e5e7eb;
+  --color-error: #dc2626;
+  --color-error-suave: #fef2f2;
+
+  --fuente-titulos: 'Nunito', system-ui, sans-serif;
+  --fuente-texto: 'Inter', system-ui, sans-serif;
+
+  --radio: 12px;
+  --radio-sm: 8px;
+  --sombra: 0 10px 30px rgba(31, 41, 55, 0.08);
+  --transicion: 150ms ease;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--fuente-titulos);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--color-primario);
+}
+.logo--claro {
+  color: #fff;
+}

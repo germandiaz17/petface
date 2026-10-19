@@ -58,4 +58,4 @@ curl localhost:3000/api/testimonios
 | admin@petface.com | admin123 | admin |
 | ana@petface.com | ana12345 | adoptante |
 
-(El login real llega en la Fase 3 del roadmap.)
+También puedes crear tu propia cuenta en http://localhost:5173/registro.

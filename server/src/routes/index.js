@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import healthRoutes from './health.routes.js'
+import authRoutes from './auth.routes.js'
 import mascotasRoutes from './mascotas.routes.js'
 import solicitudesRoutes from './solicitudes.routes.js'
 import donacionesRoutes from './donaciones.routes.js'
@@ -10,6 +11,7 @@ import adminRoutes from './admin.routes.js'
 const router = Router()
 
 router.use('/health', healthRoutes)
+router.use('/auth', authRoutes)
 router.use('/mascotas', mascotasRoutes)
 router.use('/solicitudes', solicitudesRoutes)
 router.use('/donaciones', donacionesRoutes)

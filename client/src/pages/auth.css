@@ -1,0 +1,217 @@
+/* Pantallas de login y registro */
+.auth {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente-texto);
+}
+
+/* Panel con foto (izquierda) */
+.auth__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem;
+  color: #fff;
+  background:
+    linear-gradient(160deg, rgba(35, 122, 85, 0.92) 0%, rgba(35, 122, 85, 0.55) 55%, rgba(0, 0, 0, 0.35) 100%),
+    url('/img/mascotas/perro3.jpg') center / cover no-repeat;
+}
+.auth__panel h2 {
+  font-family: var(--fuente-titulos);
+  font-size: 2.5rem;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  max-width: 14ch;
+}
+.auth__panel p {
+  margin: 0;
+  font-size: 1.1rem;
+  opacity: 0.95;
+  max-width: 36ch;
+}
+.auth__beneficios {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: grid;
+  gap: 0.6rem;
+}
+.auth__beneficios li::before {
+  content: '✓';
+  display: inline-grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-right: 0.6rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  font-size: 0.8rem;
+}
+
+/* Formulario (derecha) */
+.auth__contenido {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+.auth__card {
+  width: 100%;
+  max-width: 420px;
+}
+.auth__card .logo {
+  display: none;
+  margin-bottom: 1.5rem;
+}
+.auth__card h1 {
+  font-family: var(--fuente-titulos);
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 0 0 0.4rem;
+  color: var(--color-texto);
+}
+.auth__sub {
+  margin: 0 0 1.75rem;
+  color: var(--color-texto-suave);
+}
+
+.auth__form {
+  display: grid;
+  gap: 1rem;
+}
+.campo {
+  display: grid;
+  gap: 0.35rem;
+}
+.campo label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.campo label small {
+  font-weight: 400;
+  color: var(--color-texto-suave);
+}
+.campo__input {
+  position: relative;
+}
+.campo input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem 0.9rem;
+  font: inherit;
+  color: var(--color-texto);
+  background: var(--color-superficie);
+  border: 1.5px solid var(--color-borde);
+  border-radius: var(--radio-sm);
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+}
+.campo input:focus {
+  outline: none;
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px var(--color-primario-suave);
+}
+.campo--error input {
+  border-color: var(--color-error);
+}
+.campo__error {
+  color: var(--color-error);
+  font-size: 0.85rem;
+}
+.campo__ayuda {
+  color: var(--color-texto-suave);
+  font-size: 0.85rem;
+}
+.campo__ojo {
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+  color: var(--color-primario-oscuro);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.campo__ojo:hover {
+  text-decoration: underline;
+}
+.campo__input input[type='password'],
+.campo__input input[data-con-ojo] {
+  padding-right: 5rem;
+}
+
+.auth__alerta {
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--radio-sm);
+  background: var(--color-error-suave);
+  color: var(--color-error);
+  font-size: 0.95rem;
+}
+
+.auth__boton {
+  margin-top: 0.5rem;
+  padding: 0.85rem 1rem;
+  font: inherit;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-primario);
+  border: none;
+  border-radius: var(--radio-sm);
+  cursor: pointer;
+  transition: background var(--transicion), transform var(--transicion);
+}
+.auth__boton:hover:not(:disabled) {
+  background: var(--color-primario-oscuro);
+}
+.auth__boton:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.auth__boton:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.auth__pie {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: var(--color-texto-suave);
+}
+.auth__pie a,
+.auth__volver {
+  color: var(--color-primario-oscuro);
+  font-weight: 600;
+}
+.auth__volver {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.auth__demo {
+  margin-top: 1.25rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px dashed var(--color-borde);
+  border-radius: var(--radio-sm);
+  font-size: 0.85rem;
+  color: var(--color-texto-suave);
+}
+.auth__demo code {
+  color: var(--color-texto);
+}
+
+@media (max-width: 860px) {
+  .auth {
+    grid-template-columns: 1fr;
+  }
+  .auth__panel {
+    display: none;
+  }
+  .auth__card .logo {
+    display: inline-flex;
+  }
+}

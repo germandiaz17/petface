@@ -1,6 +1,6 @@
 ---
 tags: [arquitectura, auth]
-estado: propuesta
+estado: implementado (Fase 3)
 actualizado: 2026-10-18
 ---
 # Autenticación (login mejorado)
@@ -32,3 +32,20 @@ sequenceDiagram
 - UX: mostrar/ocultar contraseña, errores por campo, botón con estado de carga, redirigir a la página que se quería ver.
 
 Relacionado: [[ADR-003 Autenticación con JWT en cookie]].
+
+## Implementado (Fase 3)
+**Backend**
+- `models/usuario.model.js` · `controllers/auth.controller.js` · `routes/auth.routes.js`
+- Contraseñas con **bcryptjs** (JavaScript puro; no necesita compilar nada). Es compatible con los hashes `$2a$` que genera pgcrypto en el seed.
+- El rol nunca viene del cliente: registrarse siempre crea un `adoptante`.
+- Login con mensaje genérico ("Email o contraseña incorrectos") para no revelar qué emails existen.
+- Contraseña: mínimo 8 y máximo 72 caracteres (72 es el límite de bcrypt).
+
+**Frontend**
+- `services/api.js`: `fetch` con `credentials: 'include'` y errores legibles (`ApiError`).
+- `context/AuthProvider.jsx` + `context/auth.js` (`useAuth()`): al cargar la página pregunta `/auth/me`, así la sesión **sobrevive a recargar**.
+- `components/RutaPrivada.jsx` (con `soloAdmin`) lista para la Fase 4.
+- `pages/Login.jsx`, `pages/Registro.jsx`, `pages/AuthLayout.jsx`, `pages/auth.css`: diseño a dos columnas (foto + formulario) que en móvil queda en una; validación por campo, mostrar/ocultar contraseña, botón con estado de carga, error general, redirección a la página de origen. En modo desarrollo muestra las cuentas de prueba.
+- "Adoptar" sin sesión → `/login` y vuelve a la página después de entrar.
+
+**Pendiente / ideas**: limitar intentos de login (rate limit), "olvidé mi contraseña", editar perfil.

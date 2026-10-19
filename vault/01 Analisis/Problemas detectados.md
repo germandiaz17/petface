@@ -4,6 +4,9 @@ actualizado: 2026-10-18
 ---
 # Problemas detectados
 
+> [!success] Resueltos en la Fase 3
+> Login real con contraseña y sesión persistente · form de donaciones ya no recarga la página · botón "cerrar" y validación del modal · `class`/`for` · input sin `onChange` · selector global `section` (se eliminó `formulario.css`) · datos de Max/Luna/Paris · lint en 0 errores · título y `lang` del HTML.
+
 Prioridad: 🔴 alta · 🟠 media · 🟢 baja
 
 ## Login
