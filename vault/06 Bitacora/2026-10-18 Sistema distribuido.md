@@ -22,5 +22,11 @@ Versión simple del [[Plan sistemas distribuidos]] (ver [[ADR-007 Sistema distri
 - Navegador (localhost:8080): campana con aviso, tarjeta del admin mostrando las dos réplicas; campana en móvil.
 - Simulación de Vercel: API y microservicio como funciones separadas con instancias distintas; el evento llega.
 
+## En producción (petface.vercel.app)
+- `/notif/health` responde desde una función distinta a la API (`vercel-notif-…` vs `vercel-…`).
+- 40 peticiones simultáneas → Vercel encendió decenas de instancias de la API (escalado automático).
+- Donación de prueba ("Prueba de despliegue", $1.000) → en los logs de Vercel: `POST /notif/eventos 201` (la API avisó al microservicio).
+- Se quitó el aviso `SECURITY WARNING: The SSL modes 'prefer', 'require'…` de `pg` pidiendo `sslmode=verify-full`.
+
 ## Para la demo
 Ver [[Guía de sustentación#Sistema distribuido (demo de 2 minutos)]].

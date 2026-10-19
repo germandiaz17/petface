@@ -2,8 +2,12 @@ import pg from 'pg'
 
 // El microservicio usa el mismo servidor de PostgreSQL, pero es dueño de SU tabla
 // ("notificaciones"): ningún otro servicio la lee ni la escribe.
+// Neon entrega la URL con sslmode=require; pg ya lo trata como verify-full pero lo avisa
+// en cada conexión. Pedimos verify-full explícitamente para evitar ese ruido en los logs.
+const normalizarSsl = (url) => url.replace(/sslmode=(prefer|require|verify-ca)\b/, 'sslmode=verify-full')
+
 export const pool = new pg.Pool({
-  connectionString: process.env.DATABASE_URL ?? 'postgres://petface:petface@localhost:5432/petface',
+  connectionString: normalizarSsl(process.env.DATABASE_URL ?? 'postgres://petface:petface@localhost:5432/petface'),
   max: process.env.VERCEL ? 2 : 5,
 })
 

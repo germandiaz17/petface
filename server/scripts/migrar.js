@@ -17,7 +17,7 @@ if (!url) {
 const carpeta = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../database')
 const leer = (archivo) => fs.readFileSync(path.join(carpeta, archivo), 'utf8')
 
-const client = new pg.Client({ connectionString: url })
+const client = new pg.Client({ connectionString: url.replace(/sslmode=(prefer|require|verify-ca)\b/, 'sslmode=verify-full') })
 await client.connect()
 try {
   const { rows } = await client.query(`SELECT to_regclass('public.usuarios') IS NOT NULL AS existe`)
