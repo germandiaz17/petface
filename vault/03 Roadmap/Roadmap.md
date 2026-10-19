@@ -55,6 +55,14 @@ actualizado: 2026-10-18
 - [x] [[Guía de sustentación]]
 - [x] Fusionar `robustecer` en `master`
 
+## Sistemas distribuidos — ver [[Plan sistemas distribuidos]]
+- [ ] D1 · Microservicio de notificaciones (MVC + BD propia)
+- [ ] D2 · Eventos con outbox, reintentos e idempotencia
+- [ ] D3 · Campana de notificaciones en la web
+- [ ] D4 · Contenedores: gateway Nginx + 2 réplicas de la API + "Estado del sistema"
+- [ ] D5 · Despliegue distribuido en Vercel (2 proyectos + 2 BD)
+- [ ] D6 · *(opcional)* Réplica de lectura de PostgreSQL
+
 ## Ideas a futuro (fuera del alcance)
 - [ ] Recuperar contraseña por email
 - [ ] Editar perfil (nombre, teléfono, contraseña)

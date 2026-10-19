@@ -26,6 +26,7 @@ PetFace es una web de **adopción de mascotas** (proyecto universitario). Este v
 - [[API REST]] — endpoints
 - [[Autenticación]] — el login nuevo
 - [[Secciones de la app]] — páginas y rutas
+- [[Plan sistemas distribuidos]] — microservicio de notificaciones, eventos, gateway y réplicas *(propuesta)*
 
 ### 03 · Roadmap
 - [[Roadmap]] — fases con checklist
