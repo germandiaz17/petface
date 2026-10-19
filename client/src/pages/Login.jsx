@@ -4,10 +4,12 @@ import { useAuth } from '../context/auth'
 import { AuthLayout } from './AuthLayout'
 import { Campo } from '../components/Campo'
 import { CampoPassword } from '../components/CampoPassword'
+import { useTitulo } from '../hooks/useTitulo'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export function Login() {
+  useTitulo('Iniciar sesión')
   const { user, login } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()

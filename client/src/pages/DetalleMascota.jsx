@@ -8,6 +8,7 @@ import { EstadoBadge } from '../components/EstadoBadge'
 import { Campo } from '../components/Campo'
 import { Cargando, ErrorCarga, Vacio } from '../components/Estados'
 import { edadTexto, etiqueta, fecha, FOTO_POR_DEFECTO } from '../utils/formato'
+import { useTitulo } from '../hooks/useTitulo'
 import './detalle.css'
 
 export function DetalleMascota() {
@@ -15,6 +16,7 @@ export function DetalleMascota() {
   const { user } = useAuth()
   const mascota = useApi(`/mascotas/${id}`)
   const mias = useApi(user ? '/solicitudes/mias' : null)
+  useTitulo(mascota.datos ? `${mascota.datos.nombre}, en adopción` : 'Mascota')
 
   if (mascota.cargando) return <Cargando />
   if (mascota.error?.status === 404 || mascota.error?.status === 400) {

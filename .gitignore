@@ -30,3 +30,7 @@ vault/.obsidian/cache
 # Variables de entorno
 .env
 !.env.example
+
+# Fotos subidas desde el admin
+server/uploads/*
+!server/uploads/.gitkeep

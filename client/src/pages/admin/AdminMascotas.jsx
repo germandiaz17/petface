@@ -49,7 +49,7 @@ export function AdminMascotas() {
       )}
       {lista.length > 0 && (
         <div className="tabla-wrap">
-          <table className="tabla">
+          <table className="tabla tabla--tarjetas">
             <thead>
               <tr>
                 <th>Mascota</th>
@@ -62,7 +62,7 @@ export function AdminMascotas() {
             <tbody>
               {lista.map((m) => (
                 <tr key={m.id}>
-                  <td>
+                  <td className="tabla__principal">
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                       <img className="miniatura" src={m.foto_url || FOTO_POR_DEFECTO} alt="" />
                       <div>
@@ -71,9 +71,9 @@ export function AdminMascotas() {
                       </div>
                     </div>
                   </td>
-                  <td>{etiqueta('especie', m.especie)} · {etiqueta('genero', m.genero)}</td>
-                  <td>{edadTexto(m.edad_meses)}</td>
-                  <td><EstadoBadge estado={m.estado} /></td>
+                  <td data-label="Especie">{etiqueta('especie', m.especie)} · {etiqueta('genero', m.genero)}</td>
+                  <td data-label="Edad">{edadTexto(m.edad_meses)}</td>
+                  <td data-label="Estado"><EstadoBadge estado={m.estado} /></td>
                   <td>
                     <div className="tabla__acciones">
                       <Link to={`/mascotas/${m.id}`} className="btn btn--fantasma btn--sm">Ver</Link>

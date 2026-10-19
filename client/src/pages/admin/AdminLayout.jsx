@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import './admin.css'
+import { useTitulo } from '../../hooks/useTitulo'
 
 const TABS = [
   { to: '/admin', texto: 'Resumen', end: true },
@@ -10,6 +11,7 @@ const TABS = [
 ]
 
 export function AdminLayout() {
+  useTitulo('Administración')
   return (
     <div className="contenedor">
       <div className="titulo-pagina">

@@ -10,8 +10,10 @@ import { Campo } from '../components/Campo'
 import { Cargando, ErrorCarga, Vacio } from '../components/Estados'
 import { fecha, FOTO_POR_DEFECTO } from '../utils/formato'
 import './perfil.css'
+import { useTitulo } from '../hooks/useTitulo'
 
 export function Perfil() {
+  useTitulo('Mi perfil')
   const { user } = useAuth()
   const toast = useToast()
   const solicitudes = useApi('/solicitudes/mias')

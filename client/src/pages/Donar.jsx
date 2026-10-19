@@ -4,11 +4,13 @@ import { api } from '../services/api'
 import { Campo } from '../components/Campo'
 import { dinero } from '../utils/formato'
 import './donar.css'
+import { useTitulo } from '../hooks/useTitulo'
 
 const MONTOS = [10000, 20000, 50000, 100000]
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export function Donar() {
+  useTitulo('Haz una donación')
   const { user } = useAuth()
   const [form, setForm] = useState({ nombre: user?.nombre ?? '', email: user?.email ?? '', monto: 20000 })
   const [errores, setErrores] = useState({})

@@ -9,6 +9,7 @@ export default defineConfig({
     // En desarrollo, /api se redirige al backend Express (evita problemas de CORS)
     proxy: {
       '/api': 'http://localhost:3000',
+      '/uploads': 'http://localhost:3000',
     },
   },
 })

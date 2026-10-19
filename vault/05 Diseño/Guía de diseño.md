@@ -39,3 +39,11 @@ Botón (primario / secundario / peligro), Input con label y error, Card de masco
 - `client/src/styles/base.css`: reset, tipografía, `.btn` (+ `--secundario`, `--fantasma`, `--peligro`, `--sm`, `--bloque`), `.campo`, `.tarjeta`, `.badge--<estado>`, `.alerta`, `.tabla`, `.grid-mascotas`, estados de carga/vacío.
 - Cada página tiene su propio `.css` con clases con prefijo (`.detalle__`, `.donar__`, `.admin__`…), sin selectores de elementos sueltos.
 - Favicon generado desde `logo.png`. Portada `hero.jpg` optimizada.
+
+## Fase 5: pulido
+- **Orden del CSS**: `main.jsx` importa `tokens.css` y `base.css` **antes** que `App`. Así el CSS de cada página puede ajustar las clases globales. (Antes iba al revés y `.contenedor` borraba márgenes de algunas páginas.)
+- **Tablas responsive**: `.tabla--tarjetas` + `data-label` en cada `<td>` → en móvil (<720px) cada fila es una tarjeta. La celda principal lleva `.tabla__principal`.
+- **Skeletons**: `GridCargando` / `PetCardCargando` en inicio y catálogo, en lugar de un spinner.
+- **Iconos**: `components/Huella.jsx` (SVG). Evitar emojis como iconos de marca: cada sistema los dibuja distinto.
+- **Accesibilidad**: enlace "Saltar al contenido", foco visible, `prefers-reduced-motion` respetado, `aria-*` en campos, diálogos y menú.
+- **Títulos de pestaña** por página con `useTitulo()`.

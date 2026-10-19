@@ -63,3 +63,14 @@ curl localhost:3000/api/mascotas?especie=gato
 curl localhost:3000/api/mascotas?q=golden
 ```
 Las rutas protegidas necesitan token; el login llega en la Fase 3. Mientras tanto, las pruebas (`npm test`) generan tokens directamente.
+
+## Subida de fotos (Fase 5)
+| Método | Ruta | Acceso | Descripción |
+|---|---|---|---|
+| POST | `/uploads` | 🛡️ | `multipart/form-data` con el campo `foto` → `201 { url: "/uploads/<uuid>.png" }` |
+
+- Se guardan en `server/uploads/` (ignorada por git) y se sirven en `GET /uploads/<archivo>` (fuera de `/api`). Vite también redirige `/uploads` al backend.
+- Validaciones: solo admin (se comprueba **antes** de guardar nada), JPG/PNG/WEBP, máximo 5 MB (`413` si se pasa), y se revisan los primeros bytes del archivo para confirmar que de verdad es una imagen.
+- Nombre aleatorio (`crypto.randomUUID()`): nunca se usa el nombre que manda el usuario.
+- Al cambiar la foto de una mascota o borrarla, la foto subida anterior se elimina del disco. Las de `/img/...` (las de ejemplo del front) no se tocan.
+- Archivos: `config/uploads.js`, `middlewares/subirFoto.js` (multer), `controllers/uploads.controller.js`, `routes/uploads.routes.js`.

@@ -125,6 +125,11 @@
 .auth__volver {
   color: var(--color-primario-oscuro);
   font-weight: 600;
+  text-decoration: none;
+}
+.auth__pie a:hover,
+.auth__volver:hover {
+  text-decoration: underline;
 }
 .auth__volver {
   display: inline-block;

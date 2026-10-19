@@ -41,6 +41,7 @@ server/src/
   controllers/     CONTROLADOR: lógica de cada petición
   routes/          URL → controlador
   middlewares/     errores, autenticación…
+server/uploads/    fotos subidas desde el admin (no se suben a git)
 database/          schema.sql y seed.sql
 vault/             documentación (Obsidian)
 ```

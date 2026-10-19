@@ -376,6 +376,57 @@ img {
   gap: 0.4rem;
   justify-content: flex-end;
 }
+/* En móvil cada fila se vuelve una tarjeta; cada celda muestra su título con data-label */
+@media (max-width: 720px) {
+  .tabla-wrap:has(.tabla--tarjetas) {
+    overflow: visible;
+    background: none;
+    border: none;
+  }
+  .tabla--tarjetas thead {
+    display: none;
+  }
+  .tabla--tarjetas,
+  .tabla--tarjetas tbody,
+  .tabla--tarjetas tr,
+  .tabla--tarjetas td {
+    display: block;
+  }
+  .tabla--tarjetas tr {
+    margin-bottom: 0.75rem;
+    padding: 0.5rem 0;
+    background: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+  }
+  .tabla--tarjetas td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.45rem 1rem;
+    border: none;
+    text-align: right !important;
+  }
+  .tabla--tarjetas td[data-label]::before {
+    content: attr(data-label);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-texto-suave);
+    text-align: left;
+  }
+  .tabla--tarjetas td.tabla__principal {
+    justify-content: flex-start;
+    padding-bottom: 0.6rem;
+    text-align: left !important;
+    border-bottom: 1px solid var(--color-borde);
+  }
+  .tabla--tarjetas .tabla__acciones {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
 .miniatura {
   width: 48px;
   height: 48px;
@@ -389,6 +440,24 @@ img {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1.5rem;
+}
+
+.saltar {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 3000;
+  padding: 0.6rem 1rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--color-primario-oscuro);
+  border-radius: var(--radio-sm);
+}
+.saltar:focus {
+  top: 0.75rem;
+}
+.layout__main:focus {
+  outline: none;
 }
 
 .sr-only {

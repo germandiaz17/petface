@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import './nosotros.css'
+import { useTitulo } from '../hooks/useTitulo'
 
 const VALORES = [
   { icono: '🐾', titulo: 'Bienestar primero', texto: 'Cada mascota recibe atención veterinaria, vacunas y cariño antes de ser adoptada.' },
@@ -8,6 +9,7 @@ const VALORES = [
 ]
 
 export function Nosotros() {
+  useTitulo('Sobre nosotros')
   return (
     <div className="contenedor">
       <div className="titulo-pagina">

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { api } from '../../services/api'
 import { useToast } from '../../context/toast'
@@ -8,6 +8,9 @@ import { ETIQUETAS, FOTO_POR_DEFECTO } from '../../utils/formato'
 
 // Fotos que ya existen en client/public/img/mascotas (atajo para elegir rápido)
 const FOTOS_DISPONIBLES = ['paris.jpg', 'perro2.jpg', 'perro3.jpg', 'gato2.jpg'].map((f) => `/img/mascotas/${f}`)
+
+const TIPOS_FOTO = ['image/jpeg', 'image/png', 'image/webp']
+const MAX_FOTO_MB = 5
 
 const VACIA = {
   nombre: '', especie: 'perro', raza: '', edadValor: '', edadUnidad: 'anios',
@@ -39,6 +42,8 @@ export function AdminMascotaForm() {
   const [errores, setErrores] = useState({})
   const [errorGeneral, setErrorGeneral] = useState('')
   const [guardando, setGuardando] = useState(false)
+  const [subiendo, setSubiendo] = useState(false)
+  const inputFoto = useRef(null)
 
   useEffect(() => {
     if (!editando) return
@@ -52,6 +57,30 @@ export function AdminMascotaForm() {
   const cambiar = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
     setErrores({ ...errores, [e.target.name]: undefined })
+  }
+
+  // Sube la foto apenas se elige; el formulario guarda solo la URL que devuelve el servidor
+  const elegirFoto = async (e) => {
+    const archivo = e.target.files[0]
+    e.target.value = '' // permite volver a elegir el mismo archivo
+    if (!archivo) return
+    if (!TIPOS_FOTO.includes(archivo.type)) {
+      return setErrores({ ...errores, foto_url: 'Elige una imagen JPG, PNG o WEBP' })
+    }
+    if (archivo.size > MAX_FOTO_MB * 1024 * 1024) {
+      return setErrores({ ...errores, foto_url: `La imagen supera ${MAX_FOTO_MB} MB` })
+    }
+    setSubiendo(true)
+    setErrores({ ...errores, foto_url: undefined })
+    try {
+      const { url } = await api.subirFoto(archivo)
+      setForm((f) => ({ ...f, foto_url: url }))
+      toast.exito('Foto subida')
+    } catch (err) {
+      setErrores((errs) => ({ ...errs, foto_url: err.message }))
+    } finally {
+      setSubiendo(false)
+    }
   }
 
   const enviar = async (e) => {
@@ -126,11 +155,22 @@ export function AdminMascotaForm() {
               {['disponible', 'en_proceso', 'adoptada'].map((v) => <option key={v} value={v}>{ETIQUETAS.estado[v]}</option>)}
             </Campo>
           </div>
+          <div className="form-mascota__subir">
+            <span className="form-mascota__subir-titulo">Foto</span>
+            <input
+              ref={inputFoto} type="file" accept={TIPOS_FOTO.join(',')} hidden
+              onChange={elegirFoto} aria-label="Subir foto"
+            />
+            <button type="button" className="btn btn--secundario" onClick={() => inputFoto.current.click()} disabled={subiendo}>
+              {subiendo ? 'Subiendo…' : '📷 Subir foto'}
+            </button>
+            <span className="campo__ayuda">JPG, PNG o WEBP · máximo {MAX_FOTO_MB} MB</span>
+          </div>
           <Campo
-            id="foto_url" name="foto_url" label="Foto (URL)" opcional
+            id="foto_url" name="foto_url" label="…o pega la URL de una imagen" opcional
             placeholder="/img/mascotas/... o https://..."
-            value={form.foto_url} onChange={cambiar}
-            ayuda="Pega la dirección de una imagen o elige una de las existentes."
+            value={form.foto_url} onChange={cambiar} error={errores.foto_url}
+            ayuda="También puedes elegir una de las fotos de ejemplo:"
           />
           <div className="form-mascota__fotos">
             {FOTOS_DISPONIBLES.map((f) => (
@@ -145,7 +185,7 @@ export function AdminMascotaForm() {
             value={form.descripcion} onChange={cambiar}
           />
           <div className="form-mascota__acciones">
-            <button className="btn" disabled={guardando}>{guardando ? 'Guardando…' : editando ? 'Guardar cambios' : 'Crear mascota'}</button>
+            <button className="btn" disabled={guardando || subiendo}>{guardando ? 'Guardando…' : editando ? 'Guardar cambios' : 'Crear mascota'}</button>
             <Link to="/admin/mascotas" className="btn btn--secundario">Cancelar</Link>
           </div>
         </div>

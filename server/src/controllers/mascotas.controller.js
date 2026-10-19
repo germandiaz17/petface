@@ -1,5 +1,6 @@
 import * as Mascota from '../models/mascota.model.js'
 import { HttpError } from '../utils/httpError.js'
+import { borrarFotoSubida } from '../config/uploads.js'
 import * as v from '../utils/validar.js'
 
 // CONTROLADOR Mascotas: valida la petición, llama al modelo y responde.
@@ -57,12 +58,18 @@ export async function actualizar(req, res) {
 
   const datos = validarMascota(req.body ?? {})
   datos.estado ??= actual.estado // si no se envía, se conserva
-  res.json(await Mascota.update(id, datos))
+  const actualizada = await Mascota.update(id, datos)
+  // Si se cambió la foto, la anterior (si era subida) ya no se usa
+  if (actual.foto_url !== actualizada.foto_url) await borrarFotoSubida(actual.foto_url)
+  res.json(actualizada)
 }
 
 // DELETE /api/mascotas/:id  (admin)
 export async function eliminar(req, res) {
-  const borrada = await Mascota.remove(v.id(req.params.id))
-  if (!borrada) throw new HttpError(404, 'Mascota no encontrada')
+  const id = v.id(req.params.id)
+  const mascota = await Mascota.findById(id)
+  if (!mascota) throw new HttpError(404, 'Mascota no encontrada')
+  await Mascota.remove(id)
+  await borrarFotoSubida(mascota.foto_url)
   res.status(204).end()
 }

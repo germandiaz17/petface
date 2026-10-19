@@ -14,8 +14,9 @@ async function request(metodo, ruta, body) {
     res = await fetch(`/api${ruta}`, {
       method: metodo,
       credentials: 'include', // envía la cookie de sesión
-      headers: body ? { 'Content-Type': 'application/json' } : undefined,
-      body: body ? JSON.stringify(body) : undefined,
+      // FormData (archivos) lo envía el navegador con su propio Content-Type
+      headers: body && !(body instanceof FormData) ? { 'Content-Type': 'application/json' } : undefined,
+      body: body instanceof FormData ? body : body ? JSON.stringify(body) : undefined,
     })
   } catch {
     throw new ApiError(0, 'No se pudo conectar con el servidor')
@@ -33,4 +34,10 @@ export const api = {
   put: (ruta, body) => request('PUT', ruta, body),
   patch: (ruta, body) => request('PATCH', ruta, body),
   delete: (ruta) => request('DELETE', ruta),
+  // Sube una imagen al backend y devuelve { url }
+  subirFoto: (archivo) => {
+    const form = new FormData()
+    form.append('foto', archivo)
+    return request('POST', '/uploads', form)
+  },
 }

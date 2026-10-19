@@ -37,17 +37,17 @@ actualizado: 2026-10-18
 - [x] Solicitudes de adopción (crear, ver mías, aprobar/rechazar)
 - [x] Donaciones y testimonios conectados a la BD
 
-## Fase 5 — Diseño
+## Fase 5 — Diseño ✅
 - [x] Tokens de diseño y estilos base ([[Guía de diseño]]) — adelantado en Fase 3/4
 - [x] Navbar + footer responsive — adelantado en Fase 4
-- [ ] Rediseño de todas las páginas, mobile-first
+- [x] Rediseño de todas las páginas, mobile-first
 - [x] Optimizar imágenes (portada 422 KB → 74 KB)
-- [ ] Tablas del admin en móvil (hoy hacen scroll horizontal)
-- [ ] Subir fotos de mascotas desde el admin (hoy se pega una URL)
-- [ ] Revisión visual completa y detalles finos
+- [x] Tablas del admin en móvil (se ven como tarjetas)
+- [x] Subir fotos de mascotas desde el admin
+- [x] Revisión visual completa y detalles finos (títulos de pestaña, skeletons, 404, accesibilidad)
 
 ## Fase 6 — Calidad y entrega
 - [x] Lint en 0 errores (desde la Fase 3)
-- [x] Pruebas básicas de la API (`npm test`, 11 pruebas)
+- [x] Pruebas básicas de la API (`npm test`, 16 pruebas)
 - [ ] README con instrucciones y capturas
 - [ ] Datos de demo y usuario admin para la presentación

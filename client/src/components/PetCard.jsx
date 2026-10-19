@@ -29,3 +29,25 @@ export function PetCard({ mascota }) {
     </Link>
   )
 }
+
+// Marcador gris mientras cargan las mascotas (evita que la página "salte")
+export function PetCardCargando() {
+  return (
+    <div className="petcard petcard--cargando" aria-hidden="true">
+      <div className="petcard__foto" />
+      <div className="petcard__cuerpo">
+        <div className="hueso hueso--titulo" />
+        <div className="hueso" />
+        <div className="hueso hueso--corto" />
+      </div>
+    </div>
+  )
+}
+
+export function GridCargando({ cantidad = 4 }) {
+  return (
+    <div className="grid-mascotas" aria-busy="true" aria-label="Cargando mascotas">
+      {Array.from({ length: cantidad }, (_, i) => <PetCardCargando key={i} />)}
+    </div>
+  )
+}

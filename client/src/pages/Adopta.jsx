@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useApi } from '../hooks/useApi'
-import { PetCard } from '../components/PetCard'
-import { Cargando, ErrorCarga, Vacio } from '../components/Estados'
+import { GridCargando, PetCard } from '../components/PetCard'
+import { ErrorCarga, Vacio } from '../components/Estados'
 import { ETIQUETAS } from '../utils/formato'
 import './adopta.css'
+import { useTitulo } from '../hooks/useTitulo'
 
 const FILTROS = ['especie', 'genero', 'tamano', 'estado']
 const NOMBRES = { especie: 'Especie', genero: 'Género', tamano: 'Tamaño', estado: 'Estado' }
 
 // Catálogo con filtros. Los filtros viven en la URL (?especie=gato...) para poder compartir el enlace.
 export function Adopta() {
+  useTitulo('Mascotas en adopción')
   const [params, setParams] = useSearchParams()
   const [busqueda, setBusqueda] = useState(params.get('q') ?? '')
 
@@ -77,7 +79,7 @@ export function Adopta() {
         )}
       </div>
 
-      {cargando && <Cargando texto="Buscando mascotas…" />}
+      {cargando && <GridCargando cantidad={8} />}
       {error && <ErrorCarga error={error} onReintentar={recargar} />}
       {datos && (
         <>

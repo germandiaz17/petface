@@ -13,8 +13,9 @@ export function Layout() {
 
   return (
     <div className="layout">
+      <a href="#contenido" className="saltar">Saltar al contenido</a>
       <Navbar />
-      <main className="layout__main">
+      <main id="contenido" className="layout__main" tabIndex={-1}>
         <Outlet />
       </main>
       <Footer />

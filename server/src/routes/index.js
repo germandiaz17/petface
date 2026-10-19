@@ -6,6 +6,7 @@ import solicitudesRoutes from './solicitudes.routes.js'
 import donacionesRoutes from './donaciones.routes.js'
 import testimoniosRoutes from './testimonios.routes.js'
 import adminRoutes from './admin.routes.js'
+import uploadsRoutes from './uploads.routes.js'
 
 // Router principal: cada recurso tiene su archivo de rutas.
 const router = Router()
@@ -17,5 +18,6 @@ router.use('/solicitudes', solicitudesRoutes)
 router.use('/donaciones', donacionesRoutes)
 router.use('/testimonios', testimoniosRoutes)
 router.use('/admin', adminRoutes)
+router.use('/uploads', uploadsRoutes)
 
 export default router

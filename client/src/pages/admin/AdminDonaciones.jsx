@@ -24,17 +24,17 @@ export function AdminDonaciones() {
         <div className="tarjeta"><Vacio titulo="Aún no hay donaciones" /></div>
       ) : (
         <div className="tabla-wrap">
-          <table className="tabla">
+          <table className="tabla tabla--tarjetas">
             <thead>
               <tr><th>Fecha</th><th>Nombre</th><th>Email</th><th style={{ textAlign: 'right' }}>Monto</th></tr>
             </thead>
             <tbody>
               {datos.donaciones.map((d) => (
                 <tr key={d.id}>
-                  <td>{fecha(d.creado_en)}</td>
-                  <td>{d.nombre}</td>
-                  <td>{d.email}</td>
-                  <td style={{ textAlign: 'right', fontWeight: 700 }}>{dinero(d.monto)}</td>
+                  <td data-label="Fecha">{fecha(d.creado_en)}</td>
+                  <td className="tabla__principal"><strong>{d.nombre}</strong></td>
+                  <td data-label="Email">{d.email}</td>
+                  <td data-label="Monto" style={{ textAlign: 'right', fontWeight: 700 }}>{dinero(d.monto)}</td>
                 </tr>
               ))}
             </tbody>

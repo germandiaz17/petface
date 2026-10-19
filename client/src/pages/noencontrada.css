@@ -1,0 +1,37 @@
+.no-encontrada {
+  display: grid;
+  justify-items: center;
+  padding-top: 5rem;
+  padding-bottom: 3rem;
+  text-align: center;
+}
+.no-encontrada .no-encontrada__codigo {
+  margin: 0;
+  font-family: var(--fuente-titulos);
+  font-size: clamp(4rem, 14vw, 7rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-primario);
+  display: flex;
+  align-items: center;
+  gap: 0.1em;
+}
+.no-encontrada__codigo svg {
+  color: var(--color-acento);
+  transform: rotate(-15deg);
+}
+.no-encontrada h1 {
+  margin-top: 1rem;
+  font-size: 2rem;
+}
+.no-encontrada p {
+  max-width: 45ch;
+  color: var(--color-texto-suave);
+}
+.no-encontrada__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}

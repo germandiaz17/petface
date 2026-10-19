@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useApi } from '../hooks/useApi'
-import { PetCard } from '../components/PetCard'
-import { Cargando, ErrorCarga } from '../components/Estados'
+import { GridCargando, PetCard } from '../components/PetCard'
+import { ErrorCarga } from '../components/Estados'
 import heroImg from '../assets/img/hero.jpg'
 import './inicio.css'
+import { useTitulo } from '../hooks/useTitulo'
 
 const PASOS = [
   { n: 1, titulo: 'Explora', texto: 'Conoce a las mascotas que buscan hogar y filtra por especie, tamaño o edad.' },
@@ -12,6 +13,7 @@ const PASOS = [
 ]
 
 export function Inicio() {
+  useTitulo()
   const mascotas = useApi('/mascotas?estado=disponible')
   const testimonios = useApi('/testimonios')
 
@@ -55,7 +57,7 @@ export function Inicio() {
             </div>
             <Link to="/adopta" className="btn btn--secundario">Ver todas →</Link>
           </div>
-          {mascotas.cargando && <Cargando />}
+          {mascotas.cargando && <GridCargando />}
           {mascotas.error && <ErrorCarga error={mascotas.error} onReintentar={mascotas.recargar} />}
           {mascotas.datos && (
             <div className="grid-mascotas">

@@ -4,11 +4,13 @@ import { useAuth } from '../context/auth'
 import { AuthLayout } from './AuthLayout'
 import { Campo } from '../components/Campo'
 import { CampoPassword } from '../components/CampoPassword'
+import { useTitulo } from '../hooks/useTitulo'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const VACIO = { nombre: '', email: '', telefono: '', password: '', confirmar: '' }
 
 export function Registro() {
+  useTitulo('Crear cuenta')
   const { user, registro } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()

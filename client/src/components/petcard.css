@@ -42,3 +42,40 @@
   margin: 0.1rem 0 0.75rem;
   color: var(--color-texto-suave);
 }
+
+/* Skeleton de carga */
+.petcard--cargando {
+  pointer-events: none;
+}
+.petcard--cargando .petcard__foto,
+.hueso {
+  background: linear-gradient(90deg, #eef0f2 25%, #f7f8f9 50%, #eef0f2 75%);
+  background-size: 200% 100%;
+  animation: brillo 1.2s ease-in-out infinite;
+}
+.hueso {
+  height: 0.9rem;
+  margin-bottom: 0.6rem;
+  border-radius: 6px;
+}
+.hueso--titulo {
+  width: 55%;
+  height: 1.3rem;
+}
+.hueso--corto {
+  width: 70%;
+}
+@keyframes brillo {
+  to {
+    background-position: -200% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .petcard--cargando .petcard__foto,
+  .hueso {
+    animation: none;
+  }
+  .petcard:hover {
+    transform: none;
+  }
+}
