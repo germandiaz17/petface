@@ -19,7 +19,7 @@ erDiagram
     varchar password_hash
     varchar telefono
     varchar rol "admin | adoptante"
-    timestamp creado_en
+    timestamptz creado_en
   }
   MASCOTAS {
     serial id PK
@@ -79,3 +79,4 @@ Relacionado: [[ADR-002 Base de datos PostgreSQL]], [[API REST]].
 - La regla "una solicitud pendiente por usuario y mascota" se garantiza con un **índice único parcial** (`WHERE estado = 'pendiente'`).
 - El seed cifra las contraseñas con `crypt(..., gen_salt('bf'))` de **pgcrypto**: genera hashes bcrypt compatibles con `bcrypt`/`bcryptjs` en Node.
 - Los scripts de `database/` se ejecutan **solo** cuando el volumen está vacío. Si cambias el esquema: `npm run db:reset` (borra los datos).
+- Las fechas son `TIMESTAMPTZ` (con zona horaria). Con `TIMESTAMP` simple, el navegador mostraba el día siguiente por la diferencia UTC/Colombia (bug encontrado en la Fase 4).

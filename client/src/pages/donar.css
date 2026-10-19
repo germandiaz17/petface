@@ -1,0 +1,63 @@
+.donar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+.donar__usos {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  list-style: none;
+}
+.donar__usos li {
+  padding: 0.9rem 1rem;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-sm);
+}
+.donar__montos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+.donar__montos legend {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.donar__monto {
+  padding: 0.85rem;
+  font: inherit;
+  font-weight: 700;
+  color: var(--color-texto);
+  background: var(--color-superficie);
+  border: 1.5px solid var(--color-borde);
+  border-radius: var(--radio-sm);
+  cursor: pointer;
+  transition: border-color var(--transicion), background var(--transicion);
+}
+.donar__monto:hover {
+  border-color: var(--color-primario);
+}
+.donar__monto--activo {
+  color: var(--color-primario-oscuro);
+  background: var(--color-primario-suave);
+  border-color: var(--color-primario);
+}
+.donar__gracias {
+  padding: 1.5rem 0;
+  text-align: center;
+}
+.donar__icono {
+  font-size: 3rem;
+}
+@media (max-width: 860px) {
+  .donar {
+    grid-template-columns: 1fr;
+  }
+}

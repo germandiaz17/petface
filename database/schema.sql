@@ -13,7 +13,7 @@ CREATE TABLE usuarios (
   telefono      VARCHAR(30),
   rol           VARCHAR(20)  NOT NULL DEFAULT 'adoptante'
                 CHECK (rol IN ('admin', 'adoptante')),
-  creado_en     TIMESTAMP    NOT NULL DEFAULT NOW()
+  creado_en     TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE mascotas (
@@ -28,7 +28,7 @@ CREATE TABLE mascotas (
   foto_url    VARCHAR(255),
   estado      VARCHAR(20)  NOT NULL DEFAULT 'disponible'
               CHECK (estado IN ('disponible', 'en_proceso', 'adoptada')),
-  creado_en   TIMESTAMP    NOT NULL DEFAULT NOW()
+  creado_en   TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE solicitudes (
@@ -39,7 +39,7 @@ CREATE TABLE solicitudes (
   telefono_contacto VARCHAR(30),
   estado            VARCHAR(20) NOT NULL DEFAULT 'pendiente'
                     CHECK (estado IN ('pendiente', 'aprobada', 'rechazada')),
-  creado_en         TIMESTAMP   NOT NULL DEFAULT NOW()
+  creado_en         TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 -- Un usuario no puede tener dos solicitudes pendientes para la misma mascota
@@ -53,7 +53,7 @@ CREATE TABLE donaciones (
   nombre     VARCHAR(100)  NOT NULL,
   email      VARCHAR(150)  NOT NULL,
   monto      NUMERIC(10,2) NOT NULL CHECK (monto > 0),
-  creado_en  TIMESTAMP     NOT NULL DEFAULT NOW()
+  creado_en  TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE testimonios (
@@ -62,5 +62,5 @@ CREATE TABLE testimonios (
   autor      VARCHAR(100) NOT NULL,
   texto      TEXT         NOT NULL,
   aprobado   BOOLEAN      NOT NULL DEFAULT FALSE,
-  creado_en  TIMESTAMP    NOT NULL DEFAULT NOW()
+  creado_en  TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

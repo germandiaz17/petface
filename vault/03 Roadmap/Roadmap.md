@@ -30,18 +30,21 @@ actualizado: 2026-10-18
 - [x] Registro / login / logout / me con bcrypt + JWT ([[Autenticación]])
 - [x] AuthContext, rutas protegidas y pantallas de login/registro rediseñadas
 
-## Fase 4 — CRUD y secciones
-- [ ] Router con todas las [[Secciones de la app]]
-- [ ] Catálogo con filtros + detalle
-- [ ] Panel admin: CRUD de mascotas
-- [ ] Solicitudes de adopción (crear, ver mías, aprobar/rechazar)
-- [ ] Donaciones y testimonios conectados a la BD
+## Fase 4 — CRUD y secciones ✅
+- [x] Router con todas las [[Secciones de la app]]
+- [x] Catálogo con filtros + detalle
+- [x] Panel admin: CRUD de mascotas
+- [x] Solicitudes de adopción (crear, ver mías, aprobar/rechazar)
+- [x] Donaciones y testimonios conectados a la BD
 
 ## Fase 5 — Diseño
-- [ ] Tokens de diseño y estilos base ([[Guía de diseño]])
-- [ ] Navbar + footer responsive
+- [x] Tokens de diseño y estilos base ([[Guía de diseño]]) — adelantado en Fase 3/4
+- [x] Navbar + footer responsive — adelantado en Fase 4
 - [ ] Rediseño de todas las páginas, mobile-first
-- [ ] Optimizar imágenes
+- [x] Optimizar imágenes (portada 422 KB → 74 KB)
+- [ ] Tablas del admin en móvil (hoy hacen scroll horizontal)
+- [ ] Subir fotos de mascotas desde el admin (hoy se pega una URL)
+- [ ] Revisión visual completa y detalles finos
 
 ## Fase 6 — Calidad y entrega
 - [x] Lint en 0 errores (desde la Fase 3)

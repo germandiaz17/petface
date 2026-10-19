@@ -1,0 +1,109 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: min(78vh, 640px);
+  color: #fff;
+  background:
+    linear-gradient(90deg, rgba(19, 41, 31, 0.85) 0%, rgba(19, 41, 31, 0.55) 45%, rgba(0, 0, 0, 0) 75%),
+    var(--hero-img) center / cover no-repeat;
+}
+.hero__contenido {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+.hero h1 {
+  max-width: 13ch;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  color: #fff;
+}
+.hero p {
+  max-width: 34ch;
+  font-size: 1.25rem;
+  opacity: 0.95;
+}
+@media (max-width: 640px) {
+  .hero {
+    background:
+      linear-gradient(180deg, rgba(19, 41, 31, 0.55) 0%, rgba(19, 41, 31, 0.85) 100%),
+      var(--hero-img) 70% center / cover no-repeat;
+  }
+}
+.hero__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.seccion--suave {
+  background: var(--color-primario-suave);
+}
+
+.pasos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.paso h3 {
+  margin: 0.75rem 0 0.35rem;
+}
+.paso p {
+  margin: 0;
+  color: var(--color-texto-suave);
+}
+.paso__numero {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  font-family: var(--fuente-titulos);
+  font-weight: 800;
+  color: var(--color-primario-oscuro);
+  background: var(--color-primario-suave);
+  border-radius: 50%;
+}
+
+.testimonios {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.testimonio {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.testimonio blockquote {
+  margin: 0;
+  font-size: 1.05rem;
+}
+.testimonio figcaption {
+  font-weight: 700;
+  color: var(--color-primario-oscuro);
+}
+
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 2.5rem;
+  color: #fff;
+  background: linear-gradient(120deg, var(--color-primario-oscuro), var(--color-primario));
+  border-radius: var(--radio);
+}
+.cta h2 {
+  color: #fff;
+  margin-bottom: 0.25rem;
+}
+.cta p {
+  margin: 0;
+  opacity: 0.92;
+}

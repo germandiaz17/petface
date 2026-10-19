@@ -4,6 +4,9 @@ actualizado: 2026-10-18
 ---
 # Estado actual
 
+> [!warning] Nota histórica
+> Esta nota describe el proyecto **antes** de la reestructuración (análisis del 2026-10-18). El estado actual está en el [[Roadmap]] y en las bitácoras.
+
 ## Resumen en una frase
 Una **SPA de React** sin backend: un "login" que solo pide un nombre, y una página única con 4 mascotas escritas a mano en el código.
 

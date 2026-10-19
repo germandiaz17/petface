@@ -1,0 +1,83 @@
+.perfil {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.perfil__datos {
+  text-align: center;
+}
+.perfil__avatar {
+  display: grid;
+  place-items: center;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1rem;
+  font-family: var(--fuente-titulos);
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  background: var(--color-primario);
+  border-radius: 50%;
+}
+.perfil__datos dl {
+  margin: 1rem 0 0;
+  text-align: left;
+}
+.perfil__datos dt {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--color-texto-suave);
+}
+.perfil__datos dd {
+  margin: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.perfil__principal {
+  display: grid;
+  gap: 2rem;
+}
+.perfil__ayuda {
+  color: var(--color-texto-suave);
+}
+.solicitudes {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.solicitud {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+}
+.solicitud__foto {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: var(--radio-sm);
+}
+.solicitud__info {
+  flex: 1;
+  display: grid;
+}
+.solicitud__nombre {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+.solicitud__fecha {
+  font-size: 0.875rem;
+  color: var(--color-texto-suave);
+}
+@media (max-width: 860px) {
+  .perfil {
+    grid-template-columns: 1fr;
+  }
+  .solicitud {
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,44 @@
+.petcard {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  transition: transform var(--transicion), box-shadow var(--transicion);
+}
+.petcard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(31, 41, 55, 0.14);
+}
+.petcard__foto {
+  position: relative;
+  flex-shrink: 0;
+  aspect-ratio: 4 / 3;
+  background: var(--color-borde);
+}
+.petcard__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.petcard__estado {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+}
+.petcard__cuerpo {
+  flex: 1;
+  padding: 1rem 1.1rem 1.25rem;
+}
+.petcard__cuerpo h3 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+.petcard__raza {
+  margin: 0.1rem 0 0.75rem;
+  color: var(--color-texto-suave);
+}

@@ -1,0 +1,39 @@
+.nosotros__mision p {
+  max-width: 70ch;
+  margin: 0;
+  font-size: 1.1rem;
+}
+.nosotros__valores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+.nosotros__valores p {
+  margin: 0;
+  color: var(--color-texto-suave);
+}
+.nosotros__icono {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.nosotros__contacto {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+}
+.nosotros__contacto p {
+  margin: 0;
+}
+.nosotros__contacto ul {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+@media (max-width: 860px) {
+  .nosotros__contacto {
+    grid-template-columns: 1fr;
+  }
+}

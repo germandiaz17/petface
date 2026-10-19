@@ -1,0 +1,23 @@
+.filtros {
+  display: grid;
+  grid-template-columns: 2fr repeat(4, 1fr) auto;
+  align-items: end;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+.filtros__limpiar {
+  white-space: nowrap;
+}
+.resultados {
+  margin: 1.5rem 0 1rem;
+  color: var(--color-texto-suave);
+  font-weight: 600;
+}
+@media (max-width: 960px) {
+  .filtros {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .filtros__busqueda {
+    grid-column: 1 / -1;
+  }
+}

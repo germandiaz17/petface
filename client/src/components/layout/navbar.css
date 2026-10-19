@@ -1,0 +1,120 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-borde);
+}
+.navbar__fila {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 68px;
+}
+.navbar__marca {
+  text-decoration: none;
+}
+.navbar__toggle {
+  display: none;
+  margin-left: auto;
+  padding: 0.35rem 0.7rem;
+  font-size: 1.35rem;
+  color: var(--color-texto);
+  background: none;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-sm);
+  cursor: pointer;
+}
+.navbar__menu {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.navbar__enlaces {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.navbar__enlace {
+  display: block;
+  padding: 0.5rem 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--color-texto-suave);
+  border-radius: var(--radio-sm);
+  transition: color var(--transicion), background var(--transicion);
+}
+.navbar__enlace:hover {
+  color: var(--color-texto);
+  background: var(--color-fondo);
+}
+.navbar__enlace.active {
+  color: var(--color-primario-oscuro);
+  background: var(--color-primario-suave);
+}
+.navbar__enlace--admin {
+  color: var(--color-acento);
+}
+.navbar__cuenta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.navbar__usuario {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.7rem 0.3rem 0.3rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--color-texto);
+  border-radius: 999px;
+}
+.navbar__usuario:hover,
+.navbar__usuario.active {
+  background: var(--color-primario-suave);
+}
+.navbar__avatar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  font-weight: 800;
+  color: #fff;
+  background: var(--color-primario);
+  border-radius: 50%;
+}
+
+@media (max-width: 860px) {
+  .navbar__toggle {
+    display: block;
+  }
+  .navbar__menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+    background: var(--color-superficie);
+    border-bottom: 1px solid var(--color-borde);
+    box-shadow: var(--sombra);
+  }
+  .navbar__menu--abierto {
+    display: flex;
+  }
+  .navbar__enlaces {
+    flex-direction: column;
+  }
+  .navbar__cuenta {
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-borde);
+  }
+}
