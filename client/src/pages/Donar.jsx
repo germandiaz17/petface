@@ -66,9 +66,6 @@ export function Donar() {
             <li><strong>🩺 Esterilización</strong> y atención veterinaria.</li>
             <li><strong>🏠 Refugio</strong> temporal mientras encuentran familia.</li>
           </ul>
-          <div className="alerta alerta--aviso">
-            Este es un proyecto universitario: la donación es una <strong>simulación</strong> y no se realiza ningún cobro.
-          </div>
         </div>
 
         <div className="tarjeta">
