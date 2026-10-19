@@ -15,7 +15,7 @@ export function errorHandler(err, req, res, next) {
     return res.status(err.status).json({ error: err.message })
   }
   if (err.code === 'LIMIT_FILE_SIZE') {
-    return res.status(413).json({ error: 'La imagen supera el tamaño máximo de 5 MB' })
+    return res.status(413).json({ error: 'La imagen supera el tamaño máximo de 4 MB' })
   }
   if (err.name === 'MulterError') {
     return res.status(400).json({ error: 'No se pudo procesar el archivo enviado' })

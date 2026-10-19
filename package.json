@@ -3,6 +3,10 @@
   "private": true,
   "version": "0.1.0",
   "description": "PetFace: plataforma web de adopción de mascotas",
+  "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
   "workspaces": [
     "client",
     "server"
@@ -18,7 +22,9 @@
     "db:reset": "docker compose down -v && docker compose up -d db",
     "db:logs": "docker compose logs -f db",
     "db:psql": "docker compose exec db psql -U petface -d petface",
-    "test": "npm test -w server"
+    "test": "npm test -w server",
+    "db:migrar": "node --env-file-if-exists=server/.env server/scripts/migrar.js",
+    "vercel-build": "node server/scripts/migrar.js && npm run build -w client"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

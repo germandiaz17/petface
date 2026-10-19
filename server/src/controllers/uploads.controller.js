@@ -1,5 +1,6 @@
-import fs from 'node:fs/promises'
-import { UPLOADS_URL } from '../config/uploads.js'
+import crypto from 'node:crypto'
+import { guardarFoto, subidasDisponibles } from '../config/uploads.js'
+import { TIPOS_PERMITIDOS } from '../middlewares/subirFoto.js'
 import { HttpError } from '../utils/httpError.js'
 
 // Primeros bytes ("firma") de cada formato: así comprobamos que el archivo
@@ -12,15 +13,16 @@ const FIRMAS = {
 
 // POST /api/uploads  (admin, campo "foto") → { url }
 export async function subir(req, res) {
+  if (!subidasDisponibles()) {
+    throw new HttpError(503, 'La subida de fotos no está configurada (falta conectar Vercel Blob)')
+  }
   if (!req.file) throw new HttpError(400, 'Selecciona una imagen')
-
-  const archivo = await fs.open(req.file.path)
-  const { buffer } = await archivo.read(Buffer.alloc(12), 0, 12, 0)
-  await archivo.close()
-
-  if (!FIRMAS[req.file.mimetype](buffer)) {
-    await fs.unlink(req.file.path)
+  if (!FIRMAS[req.file.mimetype](req.file.buffer)) {
     throw new HttpError(400, 'El archivo no es una imagen válida')
   }
-  res.status(201).json({ url: `${UPLOADS_URL}/${req.file.filename}` })
+
+  // Nombre aleatorio: nunca se usa el nombre que manda el usuario
+  const nombre = crypto.randomUUID() + TIPOS_PERMITIDOS[req.file.mimetype]
+  const url = await guardarFoto(nombre, req.file.buffer, req.file.mimetype)
+  res.status(201).json({ url })
 }

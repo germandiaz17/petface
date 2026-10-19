@@ -10,7 +10,7 @@ import { ETIQUETAS, FOTO_POR_DEFECTO } from '../../utils/formato'
 const FOTOS_DISPONIBLES = ['paris.jpg', 'perro2.jpg', 'perro3.jpg', 'gato2.jpg'].map((f) => `/img/mascotas/${f}`)
 
 const TIPOS_FOTO = ['image/jpeg', 'image/png', 'image/webp']
-const MAX_FOTO_MB = 5
+const MAX_FOTO_MB = 4
 
 const VACIA = {
   nombre: '', especie: 'perro', raza: '', edadValor: '', edadUnidad: 'anios',

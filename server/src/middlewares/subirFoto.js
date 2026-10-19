@@ -1,18 +1,15 @@
-import crypto from 'node:crypto'
 import multer from 'multer'
-import { UPLOADS_DIR } from '../config/uploads.js'
 import { HttpError } from '../utils/httpError.js'
 
 export const TIPOS_PERMITIDOS = { 'image/jpeg': '.jpg', 'image/png': '.png', 'image/webp': '.webp' }
-export const TAMANO_MAXIMO = 5 * 1024 * 1024 // 5 MB
+// Vercel limita el cuerpo de las peticiones a 4,5 MB: dejamos 4 MB para las fotos
+export const TAMANO_MAXIMO_MB = 4
 
-// Recibe un archivo del campo "foto" (multipart/form-data) y lo guarda con un nombre aleatorio
+// Recibe un archivo del campo "foto" (multipart/form-data) y lo deja en memoria (req.file.buffer);
+// el controlador decide dónde guardarlo después de verificarlo.
 export const subirFoto = multer({
-  storage: multer.diskStorage({
-    destination: UPLOADS_DIR,
-    filename: (req, file, cb) => cb(null, crypto.randomUUID() + TIPOS_PERMITIDOS[file.mimetype]),
-  }),
-  limits: { fileSize: TAMANO_MAXIMO, files: 1 },
+  storage: multer.memoryStorage(),
+  limits: { fileSize: TAMANO_MAXIMO_MB * 1024 * 1024, files: 1 },
   fileFilter: (req, file, cb) => {
     if (TIPOS_PERMITIDOS[file.mimetype]) cb(null, true)
     else cb(new HttpError(400, 'Solo se permiten imágenes JPG, PNG o WEBP'))

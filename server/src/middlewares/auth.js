@@ -1,6 +1,10 @@
 import jwt from 'jsonwebtoken'
 import { HttpError } from '../utils/httpError.js'
 
+if (!process.env.JWT_SECRET && process.env.NODE_ENV === 'production') {
+  // En producción un secreto conocido permitiría falsificar sesiones: mejor no arrancar
+  throw new Error('Falta la variable de entorno JWT_SECRET (configúrala en Vercel → Settings → Environment Variables)')
+}
 export const JWT_SECRET = process.env.JWT_SECRET ?? 'secreto-solo-para-desarrollo'
 if (!process.env.JWT_SECRET) {
   console.warn('⚠️  JWT_SECRET no está definido en server/.env; usando un valor de desarrollo.')

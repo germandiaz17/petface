@@ -87,6 +87,20 @@ Abre **http://localhost:5173**.
 
 También puedes crear tu propia cuenta en `/registro`.
 
+## Despliegue en Vercel
+
+El repositorio está listo para Vercel (`vercel.json`): la web se publica como sitio estático y la API de Express corre como función serverless (`api/index.js`), todo bajo la misma URL.
+
+| Variable de entorno (Vercel → Settings → Environment Variables) | Para qué |
+|---|---|
+| `DATABASE_URL` | Conexión a PostgreSQL en **Neon** (usa la cadena *pooled*) |
+| `JWT_SECRET` | Texto largo y aleatorio para firmar las sesiones (`openssl rand -hex 32`) |
+| `BLOB_READ_WRITE_TOKEN` | Lo crea Vercel al conectar un **Blob store** público; guarda las fotos subidas |
+
+- En cada despliegue, `server/scripts/migrar.js` crea las tablas y los datos de demo **solo si la base de datos está vacía**; nunca borra datos.
+- Node.js 24 (fijado en `package.json` → `engines`).
+- Límite de Vercel: 4,5 MB por petición, por eso las fotos admiten hasta 4 MB.
+
 ## Scripts
 
 | Comando | Qué hace |
@@ -99,6 +113,7 @@ También puedes crear tu propia cuenta en `/registro`.
 | `npm run db:up` / `db:down` | Enciende / apaga PostgreSQL |
 | `npm run db:reset` | **Borra** la BD y la recrea desde `database/*.sql` |
 | `npm run db:psql` | Consola SQL dentro del contenedor |
+| `npm run db:migrar` | Crea tablas + datos de demo si la BD (de `DATABASE_URL`) está vacía |
 
 ## Estructura
 
@@ -117,7 +132,9 @@ server/src/
   routes/            URL → controlador
   middlewares/       autenticación, subida de fotos, errores
 server/test/         pruebas de la API
-server/uploads/      fotos subidas desde el admin (no se suben a git)
+server/uploads/      fotos subidas en local (en Vercel van a Vercel Blob)
+server/scripts/      migrar.js: prepara la BD en cada despliegue
+api/index.js         entrada de la API en Vercel
 database/            schema.sql (tablas) y seed.sql (datos de prueba)
 vault/               documentación del proyecto (Obsidian)
 ```
@@ -142,7 +159,7 @@ Todos los endpoints están documentados en [`vault/02 Arquitectura/API REST.md`]
 - Rutas protegidas por rol en el backend (no solo ocultas en el frontend).
 - Login bloqueado 15 minutos tras 5 intentos fallidos.
 - Consultas SQL siempre parametrizadas (`$1, $2…`) contra inyección SQL.
-- Subida de fotos: solo admin, JPG/PNG/WEBP hasta 5 MB, se verifica el contenido real del archivo y se guarda con nombre aleatorio.
+- Subida de fotos: solo admin, JPG/PNG/WEBP hasta 4 MB, se verifica el contenido real del archivo y se guarda con nombre aleatorio.
 
 ## Solución de problemas
 

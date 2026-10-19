@@ -83,8 +83,8 @@ test('rechaza archivos que no son imágenes', async () => {
   assert.equal(vacio.status, 400)
 })
 
-test('rechaza imágenes de más de 5 MB', async () => {
-  const grande = Buffer.concat([PNG, Buffer.alloc(5 * 1024 * 1024)])
+test('rechaza imágenes de más de 4 MB', async () => {
+  const grande = Buffer.concat([PNG, Buffer.alloc(4 * 1024 * 1024)])
   const r = await subir(grande, 'image/png', 'grande.png', tokenAdmin)
   assert.equal(r.status, 413)
 })
