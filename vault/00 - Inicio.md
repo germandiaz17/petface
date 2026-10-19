@@ -44,6 +44,7 @@ PetFace es una web de **adopción de mascotas** (proyecto universitario). Este v
 - [[Guía de diseño]]
 
 ### 07 · Presentación
+- [[Resumen del proyecto]] — funcionalidades + justificación del MVC y de los sistemas distribuidos
 - [[Guía de sustentación]] — guion de demo, MVC explicado y preguntas probables
 
 ### 06 · Bitácora
