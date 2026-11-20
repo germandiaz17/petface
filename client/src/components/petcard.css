@@ -79,3 +79,14 @@
     transform: none;
   }
 }
+
+/* Tarjeta que acaba de cambiar en vivo */
+.petcard--resaltada {
+  animation: resaltar 2.5s ease-out;
+}
+@keyframes resaltar {
+  0%,
+  60% {
+    box-shadow: 0 0 0 4px var(--color-acento);
+  }
+}

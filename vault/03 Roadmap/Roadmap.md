@@ -60,6 +60,8 @@ actualizado: 2026-10-18
 - [x] D2 · Campana de notificaciones en la web
 - [x] D3 · Docker: gateway Nginx + 2 réplicas + microservicio + tarjeta "Sistema distribuido"
 - [x] D4 · Vercel: el microservicio como segunda función
+- [x] D5 · CRUD en vivo entre réplicas (LISTEN/NOTIFY + SSE) — ver [[ADR-008 CRUD en vivo con LISTEN NOTIFY]]
+- [x] Presentación de sistemas distribuidos (diapositivas): https://claude.ai/artifact/M411Xfw7HpZjjLiGT6XkRv
 
 ## Ideas a futuro (fuera del alcance)
 - [ ] Recuperar contraseña por email

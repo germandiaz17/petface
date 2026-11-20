@@ -84,10 +84,12 @@ flowchart LR
 npm run distribuido         # construye y levanta los 5 contenedores → http://localhost:8080
 npm run distribuido:ps      # ver los contenedores
 npm run distribuido:down    # detenerlos
+GATEWAY_PORT=8081 npm run distribuido   # si el puerto 8080 está ocupado
 ```
 
 - **Microservicio**: la API avisa por HTTP ("se aprobó una solicitud", "llegó una donación") y el microservicio crea los avisos que el usuario ve en la campana 🔔.
 - **Balanceo de carga**: en *Admin → Resumen → Sistema distribuido* se ve qué réplica (`api-1` / `api-2`) atiende cada petición.
+- **CRUD en vivo**: si alguien crea, edita o borra una mascota, el catálogo y el admin se actualizan sin recargar, aunque el cambio lo haya hecho otra réplica (o un `UPDATE` en `psql`). Un trigger de PostgreSQL publica el cambio (`NOTIFY`), cada réplica lo escucha (`LISTEN`) y lo envía al navegador con Server-Sent Events.
 - **Tolerancia a fallos**: `docker stop petface-api-1 petface-notificaciones` → la app sigue funcionando con la otra réplica y sin avisos.
 - **En Vercel**: el microservicio es otra función (`api/notif.js`) y `vercel.json` hace de gateway.
 
@@ -177,7 +179,7 @@ Todos los endpoints están documentados en [`vault/02 Arquitectura/API REST.md`]
 | Recurso | Endpoints |
 |---|---|
 | Auth | `POST /api/auth/registro`, `/login`, `/logout` · `GET /api/auth/me` |
-| Mascotas | `GET /api/mascotas?especie=&genero=&tamano=&estado=&q=` · `GET/PUT/DELETE /api/mascotas/:id` · `POST /api/mascotas` |
+| Mascotas | `GET /api/mascotas/eventos` (cambios en vivo, SSE) · `GET /api/mascotas?especie=&genero=&tamano=&estado=&q=` · `GET/PUT/DELETE /api/mascotas/:id` · `POST /api/mascotas` |
 | Solicitudes | `POST /api/solicitudes` · `GET /api/solicitudes/mias` · `DELETE /api/solicitudes/:id` · `GET /api/solicitudes` · `PATCH /api/solicitudes/:id` |
 | Donaciones | `POST /api/donaciones` · `GET /api/donaciones` |
 | Testimonios | `GET /api/testimonios` · `GET /api/testimonios/todos` · `POST` · `PATCH/DELETE /api/testimonios/:id` |

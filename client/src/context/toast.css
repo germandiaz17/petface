@@ -24,6 +24,9 @@
 .toast--error {
   background: var(--color-error);
 }
+.toast--info {
+  background: var(--color-texto);
+}
 @keyframes entrar {
   from {
     opacity: 0;

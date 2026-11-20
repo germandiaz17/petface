@@ -4,10 +4,10 @@ import { edadTexto, etiqueta, FOTO_POR_DEFECTO } from '../utils/formato'
 import './petcard.css'
 
 // Tarjeta de mascota para los listados. Toda la tarjeta lleva al detalle.
-export function PetCard({ mascota }) {
+export function PetCard({ mascota, resaltada = false }) {
   const { id, nombre, especie, raza, edad_meses, genero, foto_url, estado } = mascota
   return (
-    <Link to={`/mascotas/${id}`} className="petcard">
+    <Link to={`/mascotas/${id}`} className={`petcard ${resaltada ? 'petcard--resaltada' : ''}`}>
       <div className="petcard__foto">
         <img
           src={foto_url || FOTO_POR_DEFECTO}

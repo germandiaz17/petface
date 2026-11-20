@@ -9,6 +9,7 @@ import { Campo } from '../components/Campo'
 import { Cargando, ErrorCarga, Vacio } from '../components/Estados'
 import { edadTexto, etiqueta, fecha, FOTO_POR_DEFECTO } from '../utils/formato'
 import { useTitulo } from '../hooks/useTitulo'
+import { describirCambio, useMascotasEnVivo } from '../hooks/useMascotasEnVivo'
 import './detalle.css'
 
 export function DetalleMascota() {
@@ -16,6 +17,13 @@ export function DetalleMascota() {
   const { user } = useAuth()
   const mascota = useApi(`/mascotas/${id}`)
   const mias = useApi(user ? '/solicitudes/mias' : null)
+  const toast = useToast()
+  // Si esta mascota cambia (la edita el admin, alguien la adopta…), la ficha se actualiza sola
+  useMascotasEnVivo((cambio) => {
+    if (String(cambio.id) !== id) return
+    mascota.refrescar()
+    toast.info(describirCambio(cambio))
+  })
   useTitulo(mascota.datos ? `${mascota.datos.nombre}, en adopción` : 'Mascota')
 
   if (mascota.cargando) return <Cargando />

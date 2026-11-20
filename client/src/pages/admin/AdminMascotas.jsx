@@ -7,11 +7,18 @@ import { EstadoBadge } from '../../components/EstadoBadge'
 import { Confirmar } from '../../components/Confirmar'
 import { Cargando, ErrorCarga, Vacio } from '../../components/Estados'
 import { edadTexto, etiqueta, FOTO_POR_DEFECTO } from '../../utils/formato'
+import { describirCambio, useMascotasEnVivo } from '../../hooks/useMascotasEnVivo'
+import { EnVivo } from '../../components/EnVivo'
 
 // Listado de mascotas con acciones de editar y eliminar (la R, U y D del CRUD)
 export function AdminMascotas() {
   const toast = useToast()
-  const { datos, cargando, error, recargar } = useApi('/mascotas')
+  const { datos, cargando, error, recargar, refrescar } = useApi('/mascotas')
+  // Si otro admin (u otra pestaña) cambia una mascota, la tabla se actualiza sola
+  const enVivo = useMascotasEnVivo((cambio) => {
+    refrescar()
+    toast.info(describirCambio(cambio))
+  })
   const [filtro, setFiltro] = useState('')
   const [aBorrar, setABorrar] = useState(null)
 
@@ -32,7 +39,10 @@ export function AdminMascotas() {
   return (
     <>
       <div className="admin__barra">
-        <h2>Mascotas {datos && <small>({datos.length})</small>}</h2>
+        <div>
+          <h2>Mascotas {datos && <small>({datos.length})</small>}</h2>
+          <EnVivo {...enVivo} />
+        </div>
         <div className="admin__subfiltros">
           <div className="campo">
             <label htmlFor="buscar" className="sr-only">Buscar</label>

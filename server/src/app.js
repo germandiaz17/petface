@@ -1,4 +1,3 @@
-import crypto from 'node:crypto'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import routes from './routes/index.js'
@@ -6,13 +5,13 @@ import { cargarUsuario } from './middlewares/auth.js'
 import { notFound } from './middlewares/notFound.js'
 import { errorHandler } from './middlewares/errorHandler.js'
 import { UPLOADS_DIR, UPLOADS_URL } from './config/uploads.js'
+import { INSTANCIA } from './config/instancia.js'
+
+export { INSTANCIA }
 
 const app = express()
 
-// Nombre de esta réplica (en Docker: api-1, api-2). Se devuelve en cada respuesta
-// para poder ver qué réplica atendió la petición.
-// Fuera de Docker se genera un nombre aleatorio por proceso (en Vercel: uno por instancia de la función).
-export const INSTANCIA = process.env.INSTANCIA ?? `${process.env.VERCEL ? 'vercel' : 'local'}-${crypto.randomUUID().slice(0, 6)}`
+// Cada respuesta dice qué réplica la atendió
 app.use((req, res, next) => {
   res.set('X-Instancia', INSTANCIA)
   next()

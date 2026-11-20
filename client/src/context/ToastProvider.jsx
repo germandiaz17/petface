@@ -16,6 +16,7 @@ export function ToastProvider({ children }) {
     () => ({
       exito: (m) => mostrar('exito', m),
       error: (m) => mostrar('error', m),
+      info: (m) => mostrar('info', m),
     }),
     [mostrar],
   )
@@ -26,7 +27,7 @@ export function ToastProvider({ children }) {
       <div className="toasts" role="status" aria-live="polite">
         {toasts.map((t) => (
           <div key={t.id} className={`toast toast--${t.tipo}`}>
-            {t.tipo === 'exito' ? '✓' : '!'} <span>{t.mensaje}</span>
+            {{ exito: '✓', error: '!', info: '●' }[t.tipo]} <span>{t.mensaje}</span>
           </div>
         ))}
       </div>

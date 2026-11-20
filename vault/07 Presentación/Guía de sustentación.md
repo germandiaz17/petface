@@ -31,7 +31,8 @@ Antes: `npm run distribuido` y abrir **http://localhost:8080** (no el 5173).
 2. **Balanceo de carga**: *Admin → Resumen → Probar balanceo* → las peticiones se reparten entre `api-1` y `api-2`.
 3. **Comunicación entre servicios**: en otra ventana, Ana solicita adoptar a una mascota → la campana 🔔 del admin muestra el aviso. Explicar: la API no guarda notificaciones; le *avisa* al microservicio por HTTP y él decide qué notificar.
 4. **Tolerancia a fallos**: en la terminal `docker stop petface-api-1 petface-notificaciones` → *Probar balanceo* muestra solo `api-2` y el microservicio "sin respuesta", pero se puede seguir donando y adoptando. Luego `docker start petface-api-1 petface-notificaciones`.
-5. **MVC + distribuido**: cada servicio es MVC por dentro (mostrar `notificaciones/src/models`, `controllers`, `routes`); la distribución está *entre* servicios.
+5. **CRUD en vivo** ([[ADR-008 CRUD en vivo con LISTEN NOTIFY]]): ventana A en *Adopta* (catálogo), ventana B en *Admin → Mascotas*. Crear, editar y borrar en B → A cambia sola y avisa "Luna fue actualizada por api-1 · entregado por api-2". Remate: en la terminal `npm run db:psql` y `UPDATE mascotas SET nombre = 'Luna 2' WHERE nombre = 'Luna';` → el catálogo cambia y dice "por psql".
+6. **MVC + distribuido**: cada servicio es MVC por dentro (mostrar `notificaciones/src/models`, `controllers`, `routes`); la distribución está *entre* servicios.
 
 **Preguntas probables**
 - *¿Por qué no RabbitMQ?* Para mantenerlo simple y que funcione igual en Vercel (que no permite procesos siempre encendidos). Con HTTP + tiempo límite ya se demuestra comunicación entre servicios y tolerancia a fallos.

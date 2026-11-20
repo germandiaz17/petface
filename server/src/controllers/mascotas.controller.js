@@ -2,6 +2,7 @@ import * as Mascota from '../models/mascota.model.js'
 import { HttpError } from '../utils/httpError.js'
 import { borrarFotoSubida } from '../config/uploads.js'
 import * as v from '../utils/validar.js'
+import * as TiempoReal from '../services/tiempoReal.js'
 
 // CONTROLADOR Mascotas: valida la petición, llama al modelo y responde.
 
@@ -34,6 +35,22 @@ export async function listar(req, res) {
     q: v.texto(req.query.q, 'q', { max: 80 }),
   }
   res.json(await Mascota.findAll(filtros))
+}
+
+// GET /api/mascotas/eventos  → conexión abierta (Server-Sent Events) que avisa cada cambio
+export async function eventos(req, res) {
+  if (!TiempoReal.disponible) return res.status(204).end() // 204: el navegador deja de intentarlo
+  await TiempoReal.iniciar() // si la BD no responde, lanza error y el navegador reintenta solo
+
+  res.set({
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    Connection: 'keep-alive',
+    'X-Accel-Buffering': 'no', // que Nginx no acumule los mensajes
+  })
+  res.flushHeaders()
+  const salir = TiempoReal.suscribir(res)
+  res.on('close', salir)
 }
 
 // GET /api/mascotas/:id

@@ -5,6 +5,7 @@ import { ErrorCarga } from '../components/Estados'
 import heroImg from '../assets/img/hero.jpg'
 import './inicio.css'
 import { useTitulo } from '../hooks/useTitulo'
+import { useMascotasEnVivo } from '../hooks/useMascotasEnVivo'
 
 const PASOS = [
   { n: 1, titulo: 'Explora', texto: 'Conoce a las mascotas que buscan hogar y filtra por especie, tamaño o edad.' },
@@ -15,6 +16,7 @@ const PASOS = [
 export function Inicio() {
   useTitulo()
   const mascotas = useApi('/mascotas?estado=disponible')
+  useMascotasEnVivo(mascotas.refrescar) // la sección de mascotas se actualiza sola
   const testimonios = useApi('/testimonios')
 
   return (

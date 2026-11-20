@@ -1,0 +1,31 @@
+.en-vivo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.25rem 0.7rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--color-texto-suave);
+  background: var(--color-superficie);
+}
+.en-vivo--on {
+  color: var(--color-primario-oscuro);
+  border-color: var(--color-primario);
+  background: var(--color-primario-suave);
+}
+.en-vivo__punto {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--color-texto-suave);
+}
+.en-vivo--on .en-vivo__punto {
+  background: var(--color-primario);
+  animation: latir 1.6s ease-in-out infinite;
+}
+@keyframes latir {
+  50% {
+    opacity: 0.3;
+  }
+}

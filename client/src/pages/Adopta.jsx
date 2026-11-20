@@ -6,6 +6,9 @@ import { ErrorCarga, Vacio } from '../components/Estados'
 import { ETIQUETAS } from '../utils/formato'
 import './adopta.css'
 import { useTitulo } from '../hooks/useTitulo'
+import { describirCambio, useMascotasEnVivo } from '../hooks/useMascotasEnVivo'
+import { useToast } from '../context/toast'
+import { EnVivo } from '../components/EnVivo'
 
 const FILTROS = ['especie', 'genero', 'tamano', 'estado']
 const NOMBRES = { especie: 'Especie', genero: 'Género', tamano: 'Tamaño', estado: 'Estado' }
@@ -40,7 +43,21 @@ export function Adopta() {
   }
 
   const query = params.toString()
-  const { datos, cargando, error, recargar } = useApi(`/mascotas${query ? `?${query}` : ''}`)
+  const { datos, cargando, error, recargar, refrescar } = useApi(`/mascotas${query ? `?${query}` : ''}`)
+
+  // CRUD en vivo: si alguien crea, edita o borra una mascota, el catálogo se actualiza solo
+  const toast = useToast()
+  const [resaltada, setResaltada] = useState(null)
+  const enVivo = useMascotasEnVivo((cambio) => {
+    refrescar()
+    toast.info(describirCambio(cambio))
+    setResaltada(cambio.id)
+  })
+  useEffect(() => {
+    if (!resaltada) return
+    const t = setTimeout(() => setResaltada(null), 2500)
+    return () => clearTimeout(t)
+  }, [resaltada])
   const hayFiltros = query.length > 0
 
   return (
@@ -48,6 +65,7 @@ export function Adopta() {
       <div className="titulo-pagina">
         <h1>Mascotas en adopción</h1>
         <p>Todas están vacunadas, desparasitadas y listas para conocerte.</p>
+        <p style={{ marginTop: '0.75rem' }}><EnVivo {...enVivo} /></p>
       </div>
 
       <div className="filtros tarjeta">
@@ -95,7 +113,7 @@ export function Adopta() {
             </Vacio>
           ) : (
             <div className="grid-mascotas">
-              {datos.map((m) => <PetCard key={m.id} mascota={m} />)}
+              {datos.map((m) => <PetCard key={m.id} mascota={m} resaltada={m.id === resaltada} />)}
             </div>
           )}
         </>

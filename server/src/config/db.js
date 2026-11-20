@@ -1,4 +1,5 @@
 import pg from 'pg'
+import { INSTANCIA } from './instancia.js'
 
 // Pool de conexiones a PostgreSQL. Los modelos usan query() para hablar con la BD.
 // En local apunta al Postgres de Docker; en Vercel usa DATABASE_URL (Neon).
@@ -12,6 +13,9 @@ export const pool = new pg.Pool({
   ),
   // En Vercel cada función es una instancia pequeña: pocas conexiones por instancia
   max: process.env.VERCEL ? 3 : 10,
+  // PostgreSQL guarda este nombre en cada conexión: así el trigger de "mascotas"
+  // puede decir qué réplica hizo el cambio (ver services/tiempoReal.js)
+  application_name: INSTANCIA,
 })
 
 // Siempre con parámetros ($1, $2...) para evitar inyección SQL.
